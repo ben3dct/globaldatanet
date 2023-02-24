@@ -1,0 +1,33 @@
+/** @format */
+
+.solution-list-row {
+	display: flex;
+	border: 1px solid black;
+	border-radius: 4px;
+	flex-direction: row;
+	justify-content: flex-start;
+	width: 100%;
+	height: 100px;
+	.row-group-md,
+	.row-group-lg {
+		display: flex;
+		flex-direction: row;
+		height: 100%;
+	}
+	.row-group-md {
+		width: 40%;
+		justify-content: flex-start;
+		.title {
+			width: 20%;
+		}
+		.category,
+		.author {
+			width: 10%;
+		}
+	}
+	.row-group-lg {
+		justify-content: center;
+		align-items: center;
+		width: 60%;
+	}
+}

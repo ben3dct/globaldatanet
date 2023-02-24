@@ -9,7 +9,7 @@ import { Amplify, Auth, Hub } from "aws-amplify";
 import awsConfig from "./aws-exports";
 
 import { Layout } from "./components/Layout/Layout.component";
-
+import { List } from "./components/Solutions/List.component";
 const isLocalhost = Boolean(
 	window.location.hostname === "localhost" ||
 		// [::1] is the IPv6 localhost address.
@@ -68,13 +68,17 @@ function App() {
 		<div className='main-container'>
 			<Routes>
 				<Route
-					path='/'
+					path='/auth'
 					element={<AuthPage user={user} />}
 				/>
 				<Route
-					path='/dashboard'
-					element={<Layout />}
-				/>
+					path='/'
+					element={<Layout />}>
+					<Route
+						path='solutions'
+						element={<List />}
+					/>
+				</Route>
 			</Routes>
 		</div>
 	);
