@@ -6,7 +6,6 @@ import { Auth } from "aws-amplify";
 import { CognitoHostedUIIdentityProvider } from "@aws-amplify/auth";
 import { LogoSection, GoogleSignInSection } from "./components/Auth.components";
 export const AuthPage = (props) => {
-	const { user } = props;
 	return (
 		<div className='auth-container'>
 			<div className='auth-container-item'>
