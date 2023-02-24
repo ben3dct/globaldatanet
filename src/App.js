@@ -2,9 +2,14 @@
 import "./App.scss";
 import { useEffect, useState } from "react";
 import { AuthPage } from "./pages/auth/Auth";
+
+import { Route, Routes } from "react-router-dom";
+
 import { Amplify, Auth, Hub } from "aws-amplify";
 import awsConfig from "./aws-exports";
-import { CognitoHostedUIIdentityProvider } from "@aws-amplify/auth";
+
+import { Layout } from "./components/Layout/Layout.component";
+
 const isLocalhost = Boolean(
 	window.location.hostname === "localhost" ||
 		// [::1] is the IPv6 localhost address.
@@ -61,7 +66,16 @@ function App() {
 
 	return (
 		<div className='main-container'>
-			<AuthPage user={user} />
+			<Routes>
+				<Route
+					path='/'
+					element={<AuthPage user={user} />}
+				/>
+				<Route
+					path='/dashboard'
+					element={<Layout />}
+				/>
+			</Routes>
 		</div>
 	);
 }
