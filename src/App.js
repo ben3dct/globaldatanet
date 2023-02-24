@@ -1,44 +1,67 @@
 /** @format */
-
-import "./App.css";
-
-import * as React from "react";
-
+import "./App.scss";
+import { useEffect, useState } from "react";
+import { AuthPage } from "./pages/auth/Auth";
 import { Amplify, Auth, Hub } from "aws-amplify";
+import awsConfig from "./aws-exports";
 import { CognitoHostedUIIdentityProvider } from "@aws-amplify/auth";
+const isLocalhost = Boolean(
+	window.location.hostname === "localhost" ||
+		// [::1] is the IPv6 localhost address.
+		window.location.hostname === "[::1]" ||
+		// 127.0.0.1/8 is considered localhost for IPv4.
+		window.location.hostname.match(/^127(?:\.(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)){3}$/),
+);
 
-import awsconfig from "./aws-exports";
-Amplify.configure(awsconfig);
+// Assuming you have two redirect URIs, and the first is for localhost and second is for production
+const [localRedirectSignIn, productionRedirectSignIn] = awsConfig.oauth.redirectSignIn.split(",");
+
+const [localRedirectSignOut, productionRedirectSignOut] = awsConfig.oauth.redirectSignOut.split(",");
+
+const updatedAwsConfig = {
+	...awsConfig,
+	oauth: {
+		...awsConfig.oauth,
+		redirectSignIn: isLocalhost ? localRedirectSignIn : productionRedirectSignIn,
+		redirectSignOut: isLocalhost ? localRedirectSignOut : productionRedirectSignOut,
+	},
+};
+
+Amplify.configure(updatedAwsConfig);
 
 function App() {
-	const [uset, setUser] = React.useState(null);
-	React.useEffect(() => {
-		const unsubscribe = Hub.listen("auth", ({ payload: { event, data } }) => {
+	const [user, setUser] = useState(null);
+
+	useEffect(() => {
+		Hub.listen("auth", ({ payload: { event, data } }) => {
 			// eslint-disable-next-line default-case
 			switch (event) {
 				case "signIn":
-					setUser(data);
+				case "cognitoHostedUI":
+					getUser().then((userData) => setUser(userData));
 					break;
 				case "signOut":
-					setUser(data);
+					setUser(null);
+					break;
+				case "signIn_failure":
+				case "cognitoHostedUI_failure":
+					console.log("Sign in failure", data);
 					break;
 			}
 		});
 
-		Auth.currentAuthenticatedUser()
-			.then((currentUser) => setUser(currentUser))
-			.catch(() => console.log("not signed in"));
-
-		return unsubscribe;
+		getUser().then((userData) => setUser(userData));
 	}, []);
 
+	function getUser() {
+		return Auth.currentAuthenticatedUser()
+			.then((userData) => userData)
+			.catch(() => console.log("Not signed in"));
+	}
+
 	return (
-		<div className='App'>
-			<header className='App-header'>
-				<button onClick={() => Auth.federatedSignIn({ provider: CognitoHostedUIIdentityProvider.Google })}>
-					sign in with google
-				</button>
-			</header>
+		<div className='main-container'>
+			<AuthPage user={user} />
 		</div>
 	);
 }
