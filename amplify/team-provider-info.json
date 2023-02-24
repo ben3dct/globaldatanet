@@ -10,6 +10,11 @@
       "StackName": "amplify-globaldatanet-dev-90133",
       "StackId": "arn:aws:cloudformation:eu-central-1:209675396099:stack/amplify-globaldatanet-dev-90133/7513b000-b419-11ed-85a6-060727d5a424",
       "AmplifyAppId": "diydvwg0ef689"
+    },
+    "categories": {
+      "auth": {
+        "globaldatanet": {}
+      }
     }
   }
 }
