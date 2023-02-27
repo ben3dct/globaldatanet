@@ -25,6 +25,7 @@ export const Navbar = (props) => {
 				<button className='logout-btn'>log out</button>
 				<button className='add-solution-btn'>add solution</button>
 			</div>
+			x
 		</div>
 	);
 };

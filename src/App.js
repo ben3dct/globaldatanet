@@ -10,6 +10,8 @@ import awsConfig from "./aws-exports";
 
 import { Layout } from "./components/Layout/Layout.component";
 import { List } from "./components/Solutions/List.component";
+import { AddSolution } from "./components/Solutions/Add/AddSolution.component";
+import { EditSolution } from "./components/Solutions/Edit/EditSolution.component";
 const isLocalhost = Boolean(
 	window.location.hostname === "localhost" ||
 		// [::1] is the IPv6 localhost address.
@@ -78,7 +80,19 @@ function App() {
 						path='solutions'
 						element={<List />}
 					/>
+					<Route
+						path='add'
+						element={<AddSolution />}
+					/>
+					<Route
+						path='edit'
+						element={<EditSolution />}
+					/>
 				</Route>
+				<Route
+					path='*'
+					element={<h1>404 Page not found</h1>}
+				/>
 			</Routes>
 		</div>
 	);
