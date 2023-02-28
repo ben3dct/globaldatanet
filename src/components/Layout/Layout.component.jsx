@@ -6,6 +6,7 @@ import { Outlet } from "react-router-dom";
 import { Navbar } from "../Navbar/Navbar.component";
 import { Footer } from "../Footer/Footer.component";
 export const Layout = (props) => {
+	const { footerData } = props;
 	return (
 		<div className='layout'>
 			<div className='header'>
@@ -15,7 +16,7 @@ export const Layout = (props) => {
 				<Outlet />
 			</div>
 			<div className='footer'>
-				<Footer />
+				<Footer num={footerData} />
 			</div>
 		</div>
 	);

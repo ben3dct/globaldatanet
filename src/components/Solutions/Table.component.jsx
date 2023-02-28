@@ -2,29 +2,24 @@
 
 import * as React from "react";
 import "./Table.styles.scss";
-
-export const Row = ({ id }) => {
+import { useNavigate } from "react-router-dom";
+export const Row = ({ id, title, owner, description, setEditing }) => {
+	const navigate = useNavigate();
 	return (
 		<div
 			key={id}
+			onClick={() => {
+				setEditing(id);
+				navigate("/edit");
+			}}
 			className='solution-list-row'>
 			<div className='row-group-md'>
-				<div className='title'>Hello</div>
-				<div className='author'>TEst</div>
+				<div className='title'>{title}</div>
+				<div className='author'>{owner ? owner : "unknown"}</div>
 				<div className='category'>abc</div>
 			</div>
 			<div className='row-group-lg'>
-				<div className='description'>
-					Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
-					dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
-					ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
-					fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt
-					mollit anim id est laborum.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-					incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
-					laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
-					velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt
-					in culpa qui officia deserunt mollit anim id est laborum.
-				</div>
+				<div className='description'>{description ? description : "no description"}</div>
 			</div>
 		</div>
 	);

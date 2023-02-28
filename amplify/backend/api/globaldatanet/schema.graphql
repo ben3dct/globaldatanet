@@ -1,0 +1,53 @@
+enum Categories {
+  GOVERNANCE
+  DEVOPS
+  CONTAINERS
+  SERVERLESS
+  MIGRATION
+  NETWORKING
+  SECURITY
+  STORAGE
+}
+
+type Category {
+  CATEGORY: [Categories]
+}
+
+enum FeatureStatus {
+  PLANNED
+  EXISTING
+}
+
+type Feature @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  solutionID: ID! @index(name: "bySolution")
+  name: String
+  status: FeatureStatus
+  assignee: User
+}
+
+type Attachement {
+  id: ID
+  url: String
+  type: String
+}
+
+type User {
+  id: ID
+  email: String
+}
+
+type Solution @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  title: String
+  repo: String
+  services: [String]
+  iac: [String]
+  attachments: [Attachement]
+  Features: [Feature] @hasMany(indexName: "bySolution", fields: ["id"])
+  description: String
+  generalization: String
+  category: [Categories]
+  owner: String
+}
+ 
