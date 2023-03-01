@@ -6,10 +6,10 @@ import "./AddSolution.styles.scss";
 import { TextField } from "../../input/TextInput.component";
 import { MultiSelect } from "../../input/MultiSelect.component";
 import { useNavigate } from "react-router-dom";
-import { services, iac_tools, categories, status } from "./options";
+import { services, iac_tools, categories, status, languages } from "./options";
+import { FeatureBox } from "./FeatureBox.component";
 import { API } from "aws-amplify";
 import { createSolution, createFeature } from "../../../graphql/mutations";
-import { getDefaultConfirmPasswordValidators } from "@aws-amplify/ui";
 const defaultFields = {
 	title: "",
 	description: "",
@@ -19,6 +19,7 @@ const defaultFields = {
 	iac: [{}],
 	services: [{}],
 	categories: [{}],
+	language: [{}],
 };
 const defaultFeatureFields = {
 	name: "",
@@ -61,23 +62,25 @@ export const AddSolution = (props) => {
 					description: fields.description,
 					generalization: fields.generalization,
 					category: fields.categories.value,
+					language: fields.language,
 				},
 			},
 		}).then(async (res) => {
+			console.log(res);
 			for (let x = 0; x < features.length; x++) {
-				const newFeature = await API.graphql({
+				await API.graphql({
 					query: createFeature,
 					variables: {
 						input: {
 							solutionID: res.data.createSolution.id,
 							name: features[x].name,
-							status: features[x].status,
+							status: features[x].status.value,
 							assignee: features[x].assignee,
 						},
 					},
 				});
-				console.log(newFeature);
 			}
+			navigate("/solutions");
 		});
 	};
 
@@ -148,10 +151,14 @@ export const AddSolution = (props) => {
 					fields={fields}
 					options={categories}
 				/>
-				<h1>Features</h1>
-				{features.map((feature) => {
-					return <h3>{feature.name}</h3>;
-				})}
+				<MultiSelect
+					title='language'
+					placeholder='Select languages.'
+					setFields={setFields}
+					fields={fields}
+					options={languages}
+				/>
+				<h1>Add Features</h1>
 				<TextField
 					title='Name'
 					type='text'
@@ -176,8 +183,10 @@ export const AddSolution = (props) => {
 					fields={featureFields}
 					options={status}
 				/>
+				<FeatureBox features={features} />
+
 				<button
-					className='add-solution-submit'
+					className='add-feature-submit'
 					type='button'
 					onClick={addFeature}>
 					Add Feature
@@ -192,6 +201,12 @@ export const AddSolution = (props) => {
 					type='button'
 					onClick={() => setFields(defaultFields)}>
 					Reset Fields
+				</button>
+				<button
+					className='remove-feature-submit'
+					type='button'
+					onClick={() => setFeatures([])}>
+					Remove All Features
 				</button>
 			</form>
 		</div>

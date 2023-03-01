@@ -29,3 +29,8 @@ export const status = [
 	{ value: "PLANNED", label: "Planned" },
 	{ value: "EXISTING", label: "Existing" },
 ];
+export const languages = [
+	{ value: "py", label: "Python" },
+	{ value: "ts", label: "TypeScript" },
+	{ value: "js", label: "JavaScript" },
+];

@@ -190,6 +190,7 @@ export default function SolutionCreateForm(props) {
     generalization: "",
     category: [],
     owner: "",
+    language: [],
   };
   const [title, setTitle] = React.useState(initialValues.title);
   const [repo, setRepo] = React.useState(initialValues.repo);
@@ -203,6 +204,7 @@ export default function SolutionCreateForm(props) {
   );
   const [category, setCategory] = React.useState(initialValues.category);
   const [owner, setOwner] = React.useState(initialValues.owner);
+  const [language, setLanguage] = React.useState(initialValues.language);
   const [errors, setErrors] = React.useState({});
   const resetStateValues = () => {
     setTitle(initialValues.title);
@@ -216,6 +218,8 @@ export default function SolutionCreateForm(props) {
     setCategory(initialValues.category);
     setCurrentCategoryValue(undefined);
     setOwner(initialValues.owner);
+    setLanguage(initialValues.language);
+    setCurrentLanguageValue("");
     setErrors({});
   };
   const [currentServicesValue, setCurrentServicesValue] = React.useState("");
@@ -225,6 +229,8 @@ export default function SolutionCreateForm(props) {
   const [currentCategoryValue, setCurrentCategoryValue] =
     React.useState(undefined);
   const categoryRef = React.createRef();
+  const [currentLanguageValue, setCurrentLanguageValue] = React.useState("");
+  const languageRef = React.createRef();
   const getDisplayValue = {
     category: (r) => {
       const enumDisplayValueMap = {
@@ -249,6 +255,7 @@ export default function SolutionCreateForm(props) {
     generalization: [],
     category: [],
     owner: [],
+    language: [],
   };
   const runValidationTasks = async (
     fieldName,
@@ -283,6 +290,7 @@ export default function SolutionCreateForm(props) {
           generalization,
           category,
           owner,
+          language,
         };
         const validationResponses = await Promise.all(
           Object.keys(validations).reduce((promises, fieldName) => {
@@ -345,6 +353,7 @@ export default function SolutionCreateForm(props) {
               generalization,
               category,
               owner,
+              language,
             };
             const result = onChange(modelFields);
             value = result?.title ?? value;
@@ -376,6 +385,7 @@ export default function SolutionCreateForm(props) {
               generalization,
               category,
               owner,
+              language,
             };
             const result = onChange(modelFields);
             value = result?.repo ?? value;
@@ -403,6 +413,7 @@ export default function SolutionCreateForm(props) {
               generalization,
               category,
               owner,
+              language,
             };
             const result = onChange(modelFields);
             values = result?.services ?? values;
@@ -451,6 +462,7 @@ export default function SolutionCreateForm(props) {
               generalization,
               category,
               owner,
+              language,
             };
             const result = onChange(modelFields);
             values = result?.iac ?? values;
@@ -503,6 +515,7 @@ export default function SolutionCreateForm(props) {
               generalization,
               category,
               owner,
+              language,
             };
             const result = onChange(modelFields);
             value = result?.description ?? value;
@@ -534,6 +547,7 @@ export default function SolutionCreateForm(props) {
               generalization: value,
               category,
               owner,
+              language,
             };
             const result = onChange(modelFields);
             value = result?.generalization ?? value;
@@ -561,6 +575,7 @@ export default function SolutionCreateForm(props) {
               generalization,
               category: values,
               owner,
+              language,
             };
             const result = onChange(modelFields);
             values = result?.category ?? values;
@@ -655,6 +670,7 @@ export default function SolutionCreateForm(props) {
               generalization,
               category,
               owner: value,
+              language,
             };
             const result = onChange(modelFields);
             value = result?.owner ?? value;
@@ -669,6 +685,55 @@ export default function SolutionCreateForm(props) {
         hasError={errors.owner?.hasError}
         {...getOverrideProps(overrides, "owner")}
       ></TextField>
+      <ArrayField
+        onChange={async (items) => {
+          let values = items;
+          if (onChange) {
+            const modelFields = {
+              title,
+              repo,
+              services,
+              iac,
+              description,
+              generalization,
+              category,
+              owner,
+              language: values,
+            };
+            const result = onChange(modelFields);
+            values = result?.language ?? values;
+          }
+          setLanguage(values);
+          setCurrentLanguageValue("");
+        }}
+        currentFieldValue={currentLanguageValue}
+        label={"Language"}
+        items={language}
+        hasError={errors.language?.hasError}
+        setFieldValue={setCurrentLanguageValue}
+        inputFieldRef={languageRef}
+        defaultFieldValue={""}
+      >
+        <TextField
+          label="Language"
+          isRequired={false}
+          isReadOnly={false}
+          value={currentLanguageValue}
+          onChange={(e) => {
+            let { value } = e.target;
+            if (errors.language?.hasError) {
+              runValidationTasks("language", value);
+            }
+            setCurrentLanguageValue(value);
+          }}
+          onBlur={() => runValidationTasks("language", currentLanguageValue)}
+          errorMessage={errors.language?.errorMessage}
+          hasError={errors.language?.hasError}
+          ref={languageRef}
+          labelHidden={true}
+          {...getOverrideProps(overrides, "language")}
+        ></TextField>
+      </ArrayField>
       <Flex
         justifyContent="space-between"
         {...getOverrideProps(overrides, "CTAFlex")}

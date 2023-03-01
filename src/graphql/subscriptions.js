@@ -60,6 +60,7 @@ export const onCreateSolution = /* GraphQL */ `
       generalization
       category
       owner
+      language
       createdAt
       updatedAt
     }
@@ -85,6 +86,7 @@ export const onUpdateSolution = /* GraphQL */ `
       generalization
       category
       owner
+      language
       createdAt
       updatedAt
     }
@@ -110,6 +112,7 @@ export const onDeleteSolution = /* GraphQL */ `
       generalization
       category
       owner
+      language
       createdAt
       updatedAt
     }

@@ -21,6 +21,7 @@ export declare type SolutionCreateFormInputValues = {
     generalization?: string;
     category?: string[];
     owner?: string;
+    language?: string[];
 };
 export declare type SolutionCreateFormValidationValues = {
     title?: ValidationFunction<string>;
@@ -31,6 +32,7 @@ export declare type SolutionCreateFormValidationValues = {
     generalization?: ValidationFunction<string>;
     category?: ValidationFunction<string>;
     owner?: ValidationFunction<string>;
+    language?: ValidationFunction<string>;
 };
 export declare type PrimitiveOverrideProps<T> = Partial<T> & React.DOMAttributes<HTMLDivElement>;
 export declare type SolutionCreateFormOverridesProps = {
@@ -43,6 +45,7 @@ export declare type SolutionCreateFormOverridesProps = {
     generalization?: PrimitiveOverrideProps<TextFieldProps>;
     category?: PrimitiveOverrideProps<SelectFieldProps>;
     owner?: PrimitiveOverrideProps<TextFieldProps>;
+    language?: PrimitiveOverrideProps<TextFieldProps>;
 } & EscapeHatchProps;
 export declare type SolutionCreateFormProps = React.PropsWithChildren<{
     overrides?: SolutionCreateFormOverridesProps | undefined | null;

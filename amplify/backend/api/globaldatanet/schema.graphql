@@ -49,5 +49,6 @@ type Solution @model @auth(rules: [{allow: public}]) {
   generalization: String
   category: [Categories]
   owner: String
+  language: [String]
 }
  

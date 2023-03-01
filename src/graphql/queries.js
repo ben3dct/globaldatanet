@@ -82,6 +82,7 @@ export const getSolution = /* GraphQL */ `
       generalization
       category
       owner
+      language
       createdAt
       updatedAt
     }
@@ -104,6 +105,7 @@ export const listSolutions = /* GraphQL */ `
         generalization
         category
         owner
+        language
         createdAt
         updatedAt
       }
