@@ -5,7 +5,7 @@ import "./input.styles.scss";
 import Select from "react-select";
 
 export const MultiSelect = (props) => {
-	const { title, placeholder, fields, setFields, options } = props;
+	const { title, placeholder, fields, setFields, options, isMulti = true } = props;
 	let objectKey = title.toLowerCase();
 	return (
 		<div className='input-container'>
@@ -15,7 +15,7 @@ export const MultiSelect = (props) => {
 				{title}
 			</label>
 			<Select
-				isMulti
+				isMulti={isMulti}
 				placeholder={placeholder}
 				options={options}
 				onChange={(e) => {

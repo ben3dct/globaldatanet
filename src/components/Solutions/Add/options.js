@@ -15,3 +15,17 @@ export const iac_tools = [
 	{ value: "cloudformation", label: "AWS CloudFormation" },
 	{ value: "kubernetes", label: "Kubernetes" },
 ];
+export const categories = [
+	{ value: "GOVERNANCE", label: "Governance" },
+	{ value: "DEVOPS", label: "Devops" },
+	{ value: "CONTAINERS", label: "Containers" },
+	{ value: "SERVERLESS", label: "Serverless" },
+	{ value: "MIGRATION", label: "Migration" },
+	{ value: "NETWORKING", label: "Networking" },
+	{ value: "SECURITY", label: "Security" },
+	{ value: "STORAGE", label: "Storage" },
+];
+export const status = [
+	{ value: "PLANNED", label: "Planned" },
+	{ value: "EXISTING", label: "Existing" },
+];

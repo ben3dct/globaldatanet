@@ -23,7 +23,7 @@ type Feature @model @auth(rules: [{allow: public}]) {
   solutionID: ID! @index(name: "bySolution")
   name: String
   status: FeatureStatus
-  assignee: User
+  assignee: String
 }
 
 type Attachement {

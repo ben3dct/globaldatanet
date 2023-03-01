@@ -6,9 +6,10 @@ import "./AddSolution.styles.scss";
 import { TextField } from "../../input/TextInput.component";
 import { MultiSelect } from "../../input/MultiSelect.component";
 import { useNavigate } from "react-router-dom";
-import { services, iac_tools } from "./options";
+import { services, iac_tools, categories, status } from "./options";
 import { API } from "aws-amplify";
-import { createSolution } from "../../../graphql/mutations";
+import { createSolution, createFeature } from "../../../graphql/mutations";
+import { getDefaultConfirmPasswordValidators } from "@aws-amplify/ui";
 const defaultFields = {
 	title: "",
 	description: "",
@@ -17,15 +18,33 @@ const defaultFields = {
 	owner: "",
 	iac: [{}],
 	services: [{}],
+	categories: [{}],
 };
-
+const defaultFeatureFields = {
+	name: "",
+	status: "",
+	assignee: "",
+};
 export const AddSolution = (props) => {
 	const { user } = props;
 	const navigate = useNavigate();
 	const [fields, setFields] = React.useState(defaultFields);
+	const [featureFields, setFeatureFields] = React.useState(defaultFeatureFields);
+	const [features, setFeatures] = React.useState([]);
 	React.useEffect(() => {
 		setFields({ ...fields, owner: user?.attributes?.name });
 	}, [user]);
+
+	const addFeature = () => {
+		setFeatures([...features, featureFields]);
+		setFeatureFields(defaultFeatureFields);
+	};
+	React.useEffect(() => {
+		console.log(features);
+	}, [features]);
+	React.useEffect(() => {
+		console.log(featureFields);
+	}, [featureFields]);
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
@@ -36,15 +55,30 @@ export const AddSolution = (props) => {
 				input: {
 					title: fields.title,
 					repo: fields.repository,
-					services: fields.services,
-					iac: fields.iac,
+					services: fields.services.value,
+					iac: fields.iac.value,
 					attachments: [],
 					description: fields.description,
 					generalization: fields.generalization,
-					category: [],
+					category: fields.categories.value,
 				},
 			},
-		}).then(() => navigate("/solutions"));
+		}).then(async (res) => {
+			for (let x = 0; x < features.length; x++) {
+				const newFeature = await API.graphql({
+					query: createFeature,
+					variables: {
+						input: {
+							solutionID: res.data.createSolution.id,
+							name: features[x].name,
+							status: features[x].status,
+							assignee: features[x].assignee,
+						},
+					},
+				});
+				console.log(newFeature);
+			}
+		});
 	};
 
 	return (
@@ -52,6 +86,7 @@ export const AddSolution = (props) => {
 			<form
 				className='add-form'
 				onSubmit={handleSubmit}>
+				<h1>General Information</h1>
 				<TextField
 					title='Title'
 					type='text'
@@ -93,13 +128,6 @@ export const AddSolution = (props) => {
 					placeholder='Enter the email address of the solutions owner.'
 				/>
 				<MultiSelect
-					title='IaC Tools'
-					placeholder='Select IaC Tools.'
-					setFields={setFields}
-					fields={fields}
-					options={iac_tools}
-				/>
-				<MultiSelect
 					title='IaC'
 					placeholder='Select IaC Tools.'
 					setFields={setFields}
@@ -113,6 +141,47 @@ export const AddSolution = (props) => {
 					fields={fields}
 					options={services}
 				/>
+				<MultiSelect
+					title='Categories'
+					placeholder='Select categories.'
+					setFields={setFields}
+					fields={fields}
+					options={categories}
+				/>
+				<h1>Features</h1>
+				{features.map((feature) => {
+					return <h3>{feature.name}</h3>;
+				})}
+				<TextField
+					title='Name'
+					type='text'
+					required={false}
+					setFields={setFeatureFields}
+					fields={featureFields}
+					placeholder='Enter the email address of the solutions owner.'
+				/>
+				<TextField
+					title='Assignee'
+					type='text'
+					required={false}
+					setFields={setFeatureFields}
+					fields={featureFields}
+					placeholder='Enter the email address of the solutions owner.'
+				/>
+				<MultiSelect
+					title='Status'
+					isMulti={false}
+					placeholder='Select the status of the feature.'
+					setFields={setFeatureFields}
+					fields={featureFields}
+					options={status}
+				/>
+				<button
+					className='add-solution-submit'
+					type='button'
+					onClick={addFeature}>
+					Add Feature
+				</button>
 				<button
 					className='add-solution-submit'
 					type='submit'>
@@ -120,6 +189,7 @@ export const AddSolution = (props) => {
 				</button>
 				<button
 					className='abort-solution-submit'
+					type='button'
 					onClick={() => setFields(defaultFields)}>
 					Reset Fields
 				</button>

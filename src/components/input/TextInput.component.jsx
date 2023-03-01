@@ -14,6 +14,7 @@ export const TextField = (props) => {
 				for={`${title}-input`}>
 				{required ? `${title} *` : `${title}`}
 			</label>
+
 			<input
 				className='text-input'
 				type={type}

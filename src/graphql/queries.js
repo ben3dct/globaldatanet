@@ -8,10 +8,7 @@ export const getFeature = /* GraphQL */ `
       solutionID
       name
       status
-      assignee {
-        id
-        email
-      }
+      assignee
       createdAt
       updatedAt
     }
@@ -29,6 +26,7 @@ export const listFeatures = /* GraphQL */ `
         solutionID
         name
         status
+        assignee
         createdAt
         updatedAt
       }
@@ -56,6 +54,7 @@ export const featuresBySolutionID = /* GraphQL */ `
         solutionID
         name
         status
+        assignee
         createdAt
         updatedAt
       }

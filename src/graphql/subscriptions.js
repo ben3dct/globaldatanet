@@ -8,10 +8,7 @@ export const onCreateFeature = /* GraphQL */ `
       solutionID
       name
       status
-      assignee {
-        id
-        email
-      }
+      assignee
       createdAt
       updatedAt
     }
@@ -24,10 +21,7 @@ export const onUpdateFeature = /* GraphQL */ `
       solutionID
       name
       status
-      assignee {
-        id
-        email
-      }
+      assignee
       createdAt
       updatedAt
     }
@@ -40,10 +34,7 @@ export const onDeleteFeature = /* GraphQL */ `
       solutionID
       name
       status
-      assignee {
-        id
-        email
-      }
+      assignee
       createdAt
       updatedAt
     }

@@ -11,10 +11,7 @@ export const createFeature = /* GraphQL */ `
       solutionID
       name
       status
-      assignee {
-        id
-        email
-      }
+      assignee
       createdAt
       updatedAt
     }
@@ -30,10 +27,7 @@ export const updateFeature = /* GraphQL */ `
       solutionID
       name
       status
-      assignee {
-        id
-        email
-      }
+      assignee
       createdAt
       updatedAt
     }
@@ -49,10 +43,7 @@ export const deleteFeature = /* GraphQL */ `
       solutionID
       name
       status
-      assignee {
-        id
-        email
-      }
+      assignee
       createdAt
       updatedAt
     }
