@@ -14,13 +14,14 @@ export const List = (props) => {
 		<div className='solution-list-container'>
 			<Columns />
 			<div className='item-container'>
-				{allSolutions.map(({ id, title, description, owner }) => {
+				{allSolutions.map(({ id, title, description, owner, category }) => {
 					return (
 						<Row
 							setEditing={setEditing}
 							key={id}
 							id={id}
 							title={title}
+							categories={category}
 							description={description}
 							owner={owner}
 						/>

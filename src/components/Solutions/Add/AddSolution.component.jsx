@@ -76,6 +76,7 @@ export const AddSolution = (props) => {
 					generalization: fields.generalization,
 					category: categories,
 					language: languages,
+					owner: fields.owner,
 				},
 			},
 		}).then(async (res) => {
