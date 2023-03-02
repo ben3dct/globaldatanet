@@ -5,7 +5,7 @@
  **************************************************************************/
 
 import * as React from "react";
-import { GridProps, SelectFieldProps, TextFieldProps } from "@aws-amplify/ui-react";
+import { GridProps, TextFieldProps } from "@aws-amplify/ui-react";
 import { EscapeHatchProps } from "@aws-amplify/ui-react/internal";
 export declare type ValidationResponse = {
     hasError: boolean;
@@ -43,7 +43,7 @@ export declare type SolutionCreateFormOverridesProps = {
     iac?: PrimitiveOverrideProps<TextFieldProps>;
     description?: PrimitiveOverrideProps<TextFieldProps>;
     generalization?: PrimitiveOverrideProps<TextFieldProps>;
-    category?: PrimitiveOverrideProps<SelectFieldProps>;
+    category?: PrimitiveOverrideProps<TextFieldProps>;
     owner?: PrimitiveOverrideProps<TextFieldProps>;
     language?: PrimitiveOverrideProps<TextFieldProps>;
 } & EscapeHatchProps;

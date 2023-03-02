@@ -14,7 +14,6 @@ import {
   Grid,
   Icon,
   ScrollView,
-  SelectField,
   Text,
   TextField,
   useTheme,
@@ -220,7 +219,7 @@ export default function SolutionUpdateForm(props) {
     setDescription(cleanValues.description);
     setGeneralization(cleanValues.generalization);
     setCategory(cleanValues.category ?? []);
-    setCurrentCategoryValue(undefined);
+    setCurrentCategoryValue("");
     setOwner(cleanValues.owner);
     setLanguage(cleanValues.language ?? []);
     setCurrentLanguageValue("");
@@ -241,26 +240,10 @@ export default function SolutionUpdateForm(props) {
   const servicesRef = React.createRef();
   const [currentIacValue, setCurrentIacValue] = React.useState("");
   const iacRef = React.createRef();
-  const [currentCategoryValue, setCurrentCategoryValue] =
-    React.useState(undefined);
+  const [currentCategoryValue, setCurrentCategoryValue] = React.useState("");
   const categoryRef = React.createRef();
   const [currentLanguageValue, setCurrentLanguageValue] = React.useState("");
   const languageRef = React.createRef();
-  const getDisplayValue = {
-    category: (r) => {
-      const enumDisplayValueMap = {
-        GOVERNANCE: "Governance",
-        DEVOPS: "Devops",
-        CONTAINERS: "Containers",
-        SERVERLESS: "Serverless",
-        MIGRATION: "Migration",
-        NETWORKING: "Networking",
-        SECURITY: "Security",
-        STORAGE: "Storage",
-      };
-      return enumDisplayValueMap[r];
-    },
-  };
   const validations = {
     title: [],
     repo: [],
@@ -597,21 +580,20 @@ export default function SolutionUpdateForm(props) {
             values = result?.category ?? values;
           }
           setCategory(values);
-          setCurrentCategoryValue(undefined);
+          setCurrentCategoryValue("");
         }}
         currentFieldValue={currentCategoryValue}
         label={"Category"}
         items={category}
         hasError={errors.category?.hasError}
-        getBadgeText={getDisplayValue.category}
         setFieldValue={setCurrentCategoryValue}
         inputFieldRef={categoryRef}
-        defaultFieldValue={undefined}
+        defaultFieldValue={""}
       >
-        <SelectField
+        <TextField
           label="Category"
-          placeholder="Please select an option"
-          isDisabled={false}
+          isRequired={false}
+          isReadOnly={false}
           value={currentCategoryValue}
           onChange={(e) => {
             let { value } = e.target;
@@ -626,48 +608,7 @@ export default function SolutionUpdateForm(props) {
           ref={categoryRef}
           labelHidden={true}
           {...getOverrideProps(overrides, "category")}
-        >
-          <option
-            children="Governance"
-            value="GOVERNANCE"
-            {...getOverrideProps(overrides, "categoryoption0")}
-          ></option>
-          <option
-            children="Devops"
-            value="DEVOPS"
-            {...getOverrideProps(overrides, "categoryoption1")}
-          ></option>
-          <option
-            children="Containers"
-            value="CONTAINERS"
-            {...getOverrideProps(overrides, "categoryoption2")}
-          ></option>
-          <option
-            children="Serverless"
-            value="SERVERLESS"
-            {...getOverrideProps(overrides, "categoryoption3")}
-          ></option>
-          <option
-            children="Migration"
-            value="MIGRATION"
-            {...getOverrideProps(overrides, "categoryoption4")}
-          ></option>
-          <option
-            children="Networking"
-            value="NETWORKING"
-            {...getOverrideProps(overrides, "categoryoption5")}
-          ></option>
-          <option
-            children="Security"
-            value="SECURITY"
-            {...getOverrideProps(overrides, "categoryoption6")}
-          ></option>
-          <option
-            children="Storage"
-            value="STORAGE"
-            {...getOverrideProps(overrides, "categoryoption7")}
-          ></option>
-        </SelectField>
+        ></TextField>
       </ArrayField>
       <TextField
         label="Owner"

@@ -47,7 +47,7 @@ type Solution @model @auth(rules: [{allow: public}]) {
   Features: [Feature] @hasMany(indexName: "bySolution", fields: ["id"])
   description: String
   generalization: String
-  category: [Categories]
+  category: [String]
   owner: String
   language: [String]
 }

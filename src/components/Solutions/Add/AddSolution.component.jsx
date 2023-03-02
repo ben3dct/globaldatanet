@@ -18,7 +18,7 @@ const defaultFields = {
 	owner: "",
 	iac: [{}],
 	services: [{}],
-	categories: [{}],
+	category: [{}],
 	language: [{}],
 };
 const defaultFeatureFields = {
@@ -49,20 +49,31 @@ export const AddSolution = (props) => {
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
-
+		let categories = [];
+		for (let x = 0; x < fields.category.length; x++) {
+			categories.push(fields.category[x].value);
+		}
+		let languages = [];
+		for (let x = 0; x < fields.language.length; x++) {
+			languages.push(fields.language[x].value);
+		}
+		let service = [];
+		for (let x = 0; x < fields.services.length; x++) {
+			service.push(fields.services[x].value);
+		}
 		API.graphql({
 			query: createSolution,
 			variables: {
 				input: {
 					title: fields.title,
 					repo: fields.repository,
-					services: fields.services.value,
+					services: service,
 					iac: fields.iac.value,
 					attachments: [],
 					description: fields.description,
 					generalization: fields.generalization,
-					category: fields.categories.value,
-					language: fields.language,
+					category: categories,
+					language: languages,
 				},
 			},
 		}).then(async (res) => {
@@ -145,7 +156,7 @@ export const AddSolution = (props) => {
 					options={services}
 				/>
 				<MultiSelect
-					title='Categories'
+					title='Category'
 					placeholder='Select categories.'
 					setFields={setFields}
 					fields={fields}
