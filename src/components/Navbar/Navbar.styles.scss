@@ -25,11 +25,14 @@
 	.nav-left {
 		justify-self: flex-start;
 		text-align: left;
+		cursor: pointer;
 	}
 	.logout-btn {
+		background: none;
+		color: inherit;
 		border: none;
-		background-color: none;
-		font-weight: bolder;
+		padding: 0;
+		outline: inherit;
 	}
 	.add-solution-btn {
 		background-color: rgb(0, 236, 189);
@@ -40,5 +43,6 @@
 	.add-solution-btn {
 		height: 30px;
 		border-radius: 4px;
+		cursor: pointer;
 	}
 }

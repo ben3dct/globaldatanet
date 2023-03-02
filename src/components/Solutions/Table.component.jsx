@@ -42,7 +42,16 @@ export const Row = ({ id, title, owner, description, setEditing, categories }) =
 	);
 };
 
+const options = [{ value: "title", label: "Title" }];
 export const Columns = (props) => {
+	const [filterType, setFilterType] = React.useState(null);
+	const [inputVal, setInputVal] = React.useState("");
+	React.useEffect(() => {
+		if (filterType === "title") {
+			//filter for title and update array
+		}
+	}, [inputVal, filterType]);
+
 	return (
 		<div className='column-container'>
 			<Accordion sx={{ boxShadow: "none", background: "none" }}>
@@ -55,10 +64,23 @@ export const Columns = (props) => {
 				<AccordionDetails>
 					<div className='filter-inputs'>
 						<div className='select'>
-							<Select />
+							<Select
+								isMulti={false}
+								options={options}
+								onChange={(val) => {
+									setFilterType(val.value);
+								}}
+							/>
 						</div>
 						<div className='text-inp'>
-							<input />
+							{filterType === "title" ? (
+								<input
+									onChange={(e) => setInputVal(e.target.value)}
+									value={inputVal}
+								/>
+							) : (
+								<span>select a filter</span>
+							)}
 						</div>
 					</div>
 				</AccordionDetails>

@@ -27,7 +27,11 @@ export const Navbar = (props) => {
 
 	return (
 		<div className='navbar-container'>
-			<div className='nav-left'>
+			<div
+				className='nav-left'
+				onClick={() => {
+					navigate("/solutions");
+				}}>
 				<h1>Solution Catalogue</h1>
 			</div>
 			<div className='nav-center'>{showBtn ? null : <h2>Add Solution</h2>}</div>
@@ -51,7 +55,6 @@ export const Navbar = (props) => {
 					</button>
 				)}
 			</div>
-			x
 		</div>
 	);
 };

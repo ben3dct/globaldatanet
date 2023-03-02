@@ -4,7 +4,7 @@
 .solution-list-columns {
 	display: flex;
 	flex-shrink: 0;
-	border: 1px solid black;
+	border: 0.5px solid black;
 	border-radius: 4px;
 	flex-direction: row;
 	justify-content: flex-start;
@@ -50,6 +50,10 @@
 }
 .solution-list-row {
 	margin-bottom: 10px;
+}
+.solution-list-row:hover {
+	font-weight: bolder;
+	border: 1px solid black;
 }
 .column-container {
 	display: flex;
