@@ -10,6 +10,7 @@ import { services, iac_tools, categories, status, languages } from "./options";
 import { FeatureBox } from "./FeatureBox.component";
 import { API } from "aws-amplify";
 import { createSolution, createFeature } from "../../../graphql/mutations";
+
 const defaultFields = {
 	title: "",
 	description: "",
@@ -32,6 +33,7 @@ export const AddSolution = (props) => {
 	const [fields, setFields] = React.useState(defaultFields);
 	const [featureFields, setFeatureFields] = React.useState(defaultFeatureFields);
 	const [features, setFeatures] = React.useState([]);
+
 	React.useEffect(() => {
 		setFields({ ...fields, owner: user?.attributes?.name });
 	}, [user]);
