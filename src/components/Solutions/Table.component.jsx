@@ -2,6 +2,10 @@
 
 import * as React from "react";
 import "./Table.styles.scss";
+import Accordion from "@mui/material/Accordion";
+import AccordionSummary from "@mui/material/AccordionSummary";
+import AccordionDetails from "@mui/material/AccordionDetails";
+import Typography from "@mui/material/Typography";
 import Chip from "@mui/material/Chip";
 import { useNavigate } from "react-router-dom";
 export const Row = ({ id, title, owner, description, setEditing, categories }) => {
@@ -37,16 +41,31 @@ export const Row = ({ id, title, owner, description, setEditing, categories }) =
 	);
 };
 
-export const Columns = () => {
+export const Columns = (props) => {
 	return (
-		<div className='solution-list-columns'>
-			<div className='row-group-md'>
-				<div className='title'>Title</div>
-				<div className='author'>Author</div>
-				<div className='category'>Category</div>
-			</div>
-			<div className='row-group-lg'>
-				<div className='description'>Description</div>
+		<div className='column-container'>
+			<Accordion sx={{ boxShadow: "none", background: "none" }}>
+				<AccordionSummary
+					sx={{ padding: 0 }}
+					aria-controls='panel1a-content'
+					id='panel1a-header'>
+					<Typography>Filters</Typography>
+				</AccordionSummary>
+				<AccordionDetails>
+					<div className='filter-inputs'>
+						<input />
+					</div>
+				</AccordionDetails>
+			</Accordion>
+			<div className='solution-list-columns'>
+				<div className='row-group-md'>
+					<div className='title'>Title</div>
+					<div className='author'>Author</div>
+					<div className='category'>Category</div>
+				</div>
+				<div className='row-group-lg'>
+					<div className='description'>Description</div>
+				</div>
 			</div>
 		</div>
 	);
