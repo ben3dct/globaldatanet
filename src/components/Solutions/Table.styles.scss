@@ -58,4 +58,13 @@
 	width: 100%;
 	gap: 0;
 	backdrop-filter: blur(5px);
+	.filter-inputs {
+		display: flex;
+		flex-direction: row;
+		.text-inp,
+		.select {
+			width: 50%;
+			z-index: 3;
+		}
+	}
 }

@@ -3,6 +3,7 @@
 import * as React from "react";
 import "./Table.styles.scss";
 import Accordion from "@mui/material/Accordion";
+import Select from "react-select";
 import AccordionSummary from "@mui/material/AccordionSummary";
 import AccordionDetails from "@mui/material/AccordionDetails";
 import Typography from "@mui/material/Typography";
@@ -53,7 +54,12 @@ export const Columns = (props) => {
 				</AccordionSummary>
 				<AccordionDetails>
 					<div className='filter-inputs'>
-						<input />
+						<div className='select'>
+							<Select />
+						</div>
+						<div className='text-inp'>
+							<input />
+						</div>
 					</div>
 				</AccordionDetails>
 			</Accordion>
