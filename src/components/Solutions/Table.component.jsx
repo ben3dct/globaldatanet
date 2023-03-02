@@ -8,6 +8,7 @@ import AccordionSummary from "@mui/material/AccordionSummary";
 import AccordionDetails from "@mui/material/AccordionDetails";
 import Typography from "@mui/material/Typography";
 import Chip from "@mui/material/Chip";
+import { categories } from "../Solutions/Add/options";
 import { useNavigate } from "react-router-dom";
 export const Row = ({ id, title, owner, description, setEditing, categories }) => {
 	const navigate = useNavigate();
@@ -42,15 +43,13 @@ export const Row = ({ id, title, owner, description, setEditing, categories }) =
 	);
 };
 
-const options = [{ value: "title", label: "Title" }];
+const options = [
+	{ value: "title", label: "Title" },
+	{ value: "category", label: "Category" },
+	{ value: "author", label: "Author" },
+];
 export const Columns = (props) => {
-	const [filterType, setFilterType] = React.useState(null);
-	const [inputVal, setInputVal] = React.useState("");
-	React.useEffect(() => {
-		if (filterType === "title") {
-			//filter for title and update array
-		}
-	}, [inputVal, filterType]);
+	const { filterType, filterValue, inpValue, filterVal } = props;
 
 	return (
 		<div className='column-container'>
@@ -68,18 +67,26 @@ export const Columns = (props) => {
 								isMulti={false}
 								options={options}
 								onChange={(val) => {
-									setFilterType(val.value);
+									filterType(val.value);
 								}}
 							/>
 						</div>
 						<div className='text-inp'>
-							{filterType === "title" ? (
+							{filterVal === "title" || filterVal === "author" ? (
 								<input
-									onChange={(e) => setInputVal(e.target.value)}
-									value={inputVal}
+									onChange={(e) => filterValue(e.target.value)}
+									value={inpValue}
+								/>
+							) : filterVal === "category" ? (
+								<Select
+									isMulti={false}
+									options={categories}
+									onChange={(val) => {
+										filterValue(val.value);
+									}}
 								/>
 							) : (
-								<span>select a filter</span>
+								<h1>Select</h1>
 							)}
 						</div>
 					</div>
