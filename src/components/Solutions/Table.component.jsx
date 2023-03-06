@@ -13,6 +13,7 @@ import { useNavigate } from "react-router-dom";
 import { BiNetworkChart, BiInfinite, BiTransfer } from 'react-icons/bi';
 import {FaChessQueen} from 'react-icons/fa';
 import { MdOutlineSecurity, MdStorage } from 'react-icons/md';
+import Tooltip from '@mui/material/Tooltip';
 import { SiLinuxcontainers, SiServerless } from 'react-icons/si'
 export const Row = ({ filterType, filterValue, id, title, owner, description, setEditing, categories, setFilterIsOpenFunction }) => {
 
@@ -65,6 +66,7 @@ export const Row = ({ filterType, filterValue, id, title, owner, description, se
 	}
 
 	return (
+		<Tooltip title="click to view">
 		<div
 			key={id}
 			onClick={() => {
@@ -72,7 +74,9 @@ export const Row = ({ filterType, filterValue, id, title, owner, description, se
 				navigate("/edit");
 			}}
 			className='solution-list-row'>
+			
 			<div className='row-group-md'>
+
 				<div className='title'>{title}</div>
 				<div className='author'>{owner ? owner : "unknown"}</div>
 				<div className='category'>
@@ -90,7 +94,9 @@ export const Row = ({ filterType, filterValue, id, title, owner, description, se
 			<div className='row-group-lg'>
 				<div className='description'>{description ? description : "no description"}</div>
 			</div>
+		
 		</div>
+		</Tooltip>
 	);
 };
 
@@ -104,16 +110,7 @@ export const Columns = (props) => {
 
 	return (
 		<div className='column-container'>
-			<Accordion sx={{ boxShadow: "none", background: "none" }} >
-
-				<AccordionSummary
-				onClick={() => {setFilterIsOpenFunction()}}
-					sx={{ padding: 0 }}
-					aria-controls='panel1a-content'
-					id='panel1a-header'>
-					<Typography>Filters</Typography>
-				</AccordionSummary>
-				<AccordionDetails>
+		
 					<div className='filter-inputs'>
 						<div className='select'>
 							<Select
@@ -127,6 +124,7 @@ export const Columns = (props) => {
 						<div className='text-inp'>
 							{filterVal === "title" || filterVal === "author" ? (
 								<input
+								className="filter-t-input"
 									onChange={(e) => filterValue(e.target.value)}
 									value={inpValue}
 								/>
@@ -143,8 +141,7 @@ export const Columns = (props) => {
 							)}
 						</div>
 					</div>
-				</AccordionDetails>
-			</Accordion>
+			
 			<div className='solution-list-columns'>
 				<div className='row-group-md'>
 					<div className='title'>Title</div>

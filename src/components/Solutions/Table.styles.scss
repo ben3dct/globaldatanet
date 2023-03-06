@@ -10,6 +10,7 @@
 	justify-content: flex-start;
 	width: 100%;
 	height: fit-content;
+	max-height: 200px !important;
 	padding: 10px;
 	overflow: hidden;
 	.author, .category, .description {
@@ -90,10 +91,20 @@
 	.filter-inputs {
 		display: flex;
 		flex-direction: row;
+		gap: 10px;
 		.text-inp,
 		.select {
 			width: 50%;
 			z-index: 3;
+		}
+		.text-inp {
+			.filter-t-input {
+				width: 90%;
+				border: none;
+				border-bottom: 1px solid black;
+				height: 100%;
+				margin-right: 10px;
+			}
 		}
 	}
 }

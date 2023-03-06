@@ -6,7 +6,6 @@ import { Row, Columns } from "./Table.component";
 import { API } from "aws-amplify";
 import { listSolutions, getSolution } from "../../graphql/queries";
 import { optionGroupUnstyledClasses } from "@mui/base";
-
 export const List = (props) => {
 	// List all items
 
@@ -59,6 +58,7 @@ export const List = (props) => {
 			<div className={filterIsOpen? 'item-container-open' : 'item-container'}>
 				{filteredSolutions.map(({ id, title, description, owner, category }) => {
 					return (
+						
 						<Row
 							setEditing={setEditing}
 							key={id}
@@ -70,6 +70,7 @@ export const List = (props) => {
 							description={description}
 							owner={owner}
 						/>
+						
 					);
 				})}
 			</div>
