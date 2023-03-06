@@ -88,7 +88,7 @@ export const Row = ({ filterType, filterValue, id, title, owner, description, se
 									</div>
 								);
 						  })
-						: null}
+						: <span>none</span>}
 				</div>
 			</div>
 			<div className='row-group-lg'>

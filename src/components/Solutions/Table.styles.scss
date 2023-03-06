@@ -88,7 +88,8 @@
 	position: fixed;
 	width: 100%;
 	gap: 0;
-	backdrop-filter: blur(5px);
+	background-color: white;
+	z-index: 10;
 	padding-top: 10px;
 	.filter-inputs {
 		display: flex;
@@ -105,8 +106,7 @@
 		.text-inp {
 			.filter-t-input {
 				width: 90%;
-				border: none;
-				border-bottom: 1px solid black;
+				border: 1px solid black;
 				height: 100%;
 				margin-right: 10px;
 			}
