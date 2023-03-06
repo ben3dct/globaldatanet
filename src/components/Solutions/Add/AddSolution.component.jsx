@@ -230,6 +230,19 @@ export const AddSolution = (props) => {
 					options={status}
 				/>
 				<FeatureBox features={features} />
+				<button
+					className='add-feature-submit'
+					type='button'
+					onClick={addFeature}>
+					Add Feature
+				</button>
+				<button
+					className='remove-feature-submit'
+					type='button'
+					onClick={() => setFeatures([])}>
+					Remove All Features
+				</button>
+				<br />
 				<h1>Attachements</h1>
 				<TextField
 					title='Name'
@@ -263,14 +276,21 @@ export const AddSolution = (props) => {
 					fields={attachementFields}
 					placeholder='Link your resource.'
 				/>
-				{/* <FeatureBox features={features} /> */}
-
 				<button
 					className='add-feature-submit'
 					type='button'
-					onClick={addFeature}>
-					Add Feature
+					onClick={addAttachement}>
+					Add Attachement
 				</button>
+				<button
+					className='remove-feature-submit'
+					type='button'
+					onClick={() => setAttachements([])}>
+					Remove All Attachements
+				</button>
+				{/* <FeatureBox features={features} /> */}
+				<br />
+				
 				<button
 					className='add-solution-submit'
 					type='submit'>
@@ -282,12 +302,7 @@ export const AddSolution = (props) => {
 					onClick={() => setFields(defaultFields)}>
 					Reset Fields
 				</button>
-				<button
-					className='remove-feature-submit'
-					type='button'
-					onClick={() => setFeatures([])}>
-					Remove All Features
-				</button>
+				
 			</form>
 		</div>
 	);
