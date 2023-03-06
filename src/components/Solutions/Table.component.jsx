@@ -10,9 +10,61 @@ import Typography from "@mui/material/Typography";
 import Chip from "@mui/material/Chip";
 import { categories } from "../Solutions/Add/options";
 import { useNavigate } from "react-router-dom";
-export const Row = ({ id, title, owner, description, setEditing, categories }) => {
-	const navigate = useNavigate();
-	console.log(categories);
+import { BiNetworkChart, BiInfinite, BiTransfer } from 'react-icons/bi';
+import {FaChessQueen} from 'react-icons/fa';
+import { MdOutlineSecurity, MdStorage } from 'react-icons/md';
+import { SiLinuxcontainers, SiServerless } from 'react-icons/si'
+export const Row = ({ id, title, owner, description, setEditing, categories, setFilterIsOpenFunction }) => {
+
+	const navigate = useNavigate(); 
+
+	const colorFunction = (cat) => {
+		switch(cat) {
+			case 'SERVERLESS':
+				return {backgroundColor: "#b366ff"};
+			case 'GOVERNANCE': 
+				return {backgroundColor: "#8c66ff"};
+			case 'SECURITY':
+				return {backgroundColor: "#6666ff"};
+			case 'STORAGE':
+				return {backgroundColor: "#668cff"};
+			case 'CONTAINERS':
+				return {backgroundColor: "#66b3ff"};
+			case 'DEVOPS':
+				return {backgroundColor: "#66d9ff"};
+			case 'MIGRATION':
+				return {backgroundColor: "#66ffff"};
+			case 'NETWORKING': 
+				return {backgroundColor: "#66ffd9"};
+			default:
+				return {backgroundColor: "grey"};
+		}
+	}
+
+	const iconFunction = (cat) => {
+		
+		switch(cat) {
+			case 'NETWORKING':
+				return <BiNetworkChart />;
+			case 'GOVERNANCE':
+				return <FaChessQueen />;
+			case 'SECURITY':
+				return < MdOutlineSecurity/>
+			case 'STORAGE':
+				return <MdStorage />;
+			case 'CONTAINERS':
+				return <SiLinuxcontainers />;
+			case 'DEVOPS':
+				return <BiInfinite />;
+			case 'MIGRATION':
+				return <BiTransfer />;
+			case 'SERVERLESS':
+				return <SiServerless />;
+			
+					
+		}
+	}
+
 	return (
 		<div
 			key={id}
@@ -29,7 +81,7 @@ export const Row = ({ id, title, owner, description, setEditing, categories }) =
 						? categories.map((category) => {
 								return (
 									<div className='cat-chip'>
-										<Chip label={category} />
+										<Chip icon={iconFunction(category)} label={category} sx={colorFunction(category)}/>
 									</div>
 								);
 						  })
@@ -49,12 +101,14 @@ const options = [
 	{ value: "author", label: "Author" },
 ];
 export const Columns = (props) => {
-	const { filterType, filterValue, inpValue, filterVal } = props;
+	const { filterType, filterValue, inpValue, filterVal, setFilterIsOpenFunction } = props;
 
 	return (
 		<div className='column-container'>
-			<Accordion sx={{ boxShadow: "none", background: "none" }}>
+			<Accordion sx={{ boxShadow: "none", background: "none" }} >
+
 				<AccordionSummary
+				onClick={() => {setFilterIsOpenFunction()}}
 					sx={{ padding: 0 }}
 					aria-controls='panel1a-content'
 					id='panel1a-header'>

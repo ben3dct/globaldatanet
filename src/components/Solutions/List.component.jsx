@@ -11,7 +11,7 @@ export const List = (props) => {
 	// List all items
 
 	const { allSolutions, setEditing } = props;
-
+	const [ filterIsOpen, setFilterIsOpen ] = React.useState(false);
 	const [filterType, setFilterType] = React.useState("");
 	const [filterValue, setFilterValue] = React.useState("");
 	const [filteredSolutions, setFilteredSolutions] = React.useState(allSolutions);
@@ -43,15 +43,20 @@ export const List = (props) => {
 		}
 	}, [filterType, filterValue, allSolutions]);
 
+	const setFilterIsOpenFunction = () => {
+		setFilterIsOpen(!filterIsOpen);
+	}
+
 	return (
 		<div className='solution-list-container'>
 			<Columns
+				setFilterIsOpenFunction={setFilterIsOpenFunction}
 				filterType={setFilterType}
 				filterValue={setFilterValue}
 				filterVal={filterType}
 				inpValue={filterValue}
 			/>
-			<div className='item-container'>
+			<div className={filterIsOpen? 'item-container-open' : 'item-container'}>
 				{filteredSolutions.map(({ id, title, description, owner, category }) => {
 					return (
 						<Row
