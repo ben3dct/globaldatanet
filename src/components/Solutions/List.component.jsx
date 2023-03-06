@@ -62,6 +62,8 @@ export const List = (props) => {
 						<Row
 							setEditing={setEditing}
 							key={id}
+							filterType={filterType}
+							filterValue={filterValue}
 							id={id}
 							title={title}
 							categories={category}

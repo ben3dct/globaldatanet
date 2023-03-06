@@ -14,28 +14,27 @@ import { BiNetworkChart, BiInfinite, BiTransfer } from 'react-icons/bi';
 import {FaChessQueen} from 'react-icons/fa';
 import { MdOutlineSecurity, MdStorage } from 'react-icons/md';
 import { SiLinuxcontainers, SiServerless } from 'react-icons/si'
-export const Row = ({ id, title, owner, description, setEditing, categories, setFilterIsOpenFunction }) => {
+export const Row = ({ filterType, filterValue, id, title, owner, description, setEditing, categories, setFilterIsOpenFunction }) => {
 
 	const navigate = useNavigate(); 
-
 	const colorFunction = (cat) => {
 		switch(cat) {
 			case 'SERVERLESS':
-				return {backgroundColor: "#b366ff"};
+				return filterType === "category" && filterValue !== "SERVERLESS"? {} : {backgroundColor: "#b366ff"};
 			case 'GOVERNANCE': 
-				return {backgroundColor: "#8c66ff"};
+				return filterType === "category" && filterValue !== "GOVERNANCE"? {} :{backgroundColor: "#8c66ff"};
 			case 'SECURITY':
-				return {backgroundColor: "#6666ff"};
+				return filterType === "category" && filterValue !== "SECURITY"? {} : {backgroundColor: "#6666ff"};
 			case 'STORAGE':
-				return {backgroundColor: "#668cff"};
+				return filterType === "category" && filterValue !== "STORAGE"? {} :{backgroundColor: "#668cff"};
 			case 'CONTAINERS':
-				return {backgroundColor: "#66b3ff"};
+				return filterType === "category" && filterValue !== "CONTAINERS"? {} :{backgroundColor: "#66b3ff"};
 			case 'DEVOPS':
-				return {backgroundColor: "#66d9ff"};
+				return filterType === "category" && filterValue !== "DEVOPS"? {} : {backgroundColor: "#66d9ff"};
 			case 'MIGRATION':
-				return {backgroundColor: "#66ffff"};
+				return filterType === "category" && filterValue !== "MIGRATION"? {} : {backgroundColor: "#66ffff"};
 			case 'NETWORKING': 
-				return {backgroundColor: "#66ffd9"};
+				return filterType === "category" && filterValue !== "NETWORKING"? {} : {backgroundColor: "#66ffd9"};
 			default:
 				return {backgroundColor: "grey"};
 		}
@@ -81,7 +80,7 @@ export const Row = ({ id, title, owner, description, setEditing, categories, set
 						? categories.map((category) => {
 								return (
 									<div className='cat-chip'>
-										<Chip icon={iconFunction(category)} label={category} sx={colorFunction(category)}/>
+										<Chip size="small" icon={iconFunction(category)} label={category} sx={colorFunction(category)}/>
 									</div>
 								);
 						  })
