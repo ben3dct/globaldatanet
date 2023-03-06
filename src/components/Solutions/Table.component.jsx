@@ -18,6 +18,7 @@ import { SiLinuxcontainers, SiServerless } from 'react-icons/si'
 export const Row = ({ filterType, filterValue, id, title, owner, description, setEditing, categories, setFilterIsOpenFunction }) => {
 
 	const navigate = useNavigate(); 
+	//not the best way to do it but ..
 	const colorFunction = (cat) => {
 		switch(cat) {
 			case 'SERVERLESS':
@@ -40,7 +41,7 @@ export const Row = ({ filterType, filterValue, id, title, owner, description, se
 				return {backgroundColor: "grey"};
 		}
 	}
-
+//not the best way to do it but ..
 	const iconFunction = (cat) => {
 		
 		switch(cat) {
@@ -110,7 +111,6 @@ export const Columns = (props) => {
 
 	return (
 		<div className='column-container'>
-		
 					<div className='filter-inputs'>
 						<div className='select'>
 							<Select
@@ -142,7 +142,6 @@ export const Columns = (props) => {
 							)}
 						</div>
 					</div>
-			
 			<div className='solution-list-columns'>
 				<div className='row-group-md'>
 					<div className='title'>Title</div>
