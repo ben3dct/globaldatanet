@@ -22,7 +22,7 @@ export const List = (props) => {
 	React.useEffect(() => {
 		if (filterType === "title") {
 			// List all items
-			console.log("true");
+
 			API.graphql({
 				query: listSolutions,
 				variables: { filter: { title: { contains: filterValue } } },

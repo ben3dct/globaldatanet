@@ -41,9 +41,7 @@ function App() {
 	const [editing, setEditing] = useState(null);
 	const [solutions, setSolutions] = useState([]);
 	const navigate = useNavigate();
-	useEffect(() => {
-		console.log(user);
-	}, [user]);
+
 	useEffect(() => {
 		getSolutions();
 	}, []);

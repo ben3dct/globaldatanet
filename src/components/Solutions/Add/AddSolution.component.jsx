@@ -55,12 +55,6 @@ export const AddSolution = (props) => {
 		setAttachements([...attachements, attachementFields]);
 		setAttachementFields(defaultAttachmentFields);
 	}
-	React.useEffect(() => {
-		console.log(features);
-	}, [features]);
-	React.useEffect(() => {
-		console.log(featureFields);
-	}, [featureFields]);
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
@@ -125,10 +119,6 @@ export const AddSolution = (props) => {
 			navigate("/solutions");
 		});
 	};
-	React.useEffect(() => {
-	  console.log(attachementFields)
-	
-	}, [attachementFields])
 	
 	return (
 		<div className='add-solutions-container'>
