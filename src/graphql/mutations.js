@@ -1,6 +1,57 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
+export const createAttachement = /* GraphQL */ `
+  mutation CreateAttachement(
+    $input: CreateAttachementInput!
+    $condition: ModelAttachementConditionInput
+  ) {
+    createAttachement(input: $input, condition: $condition) {
+      id
+      name
+      alt
+      type
+      link
+      solutionID
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const updateAttachement = /* GraphQL */ `
+  mutation UpdateAttachement(
+    $input: UpdateAttachementInput!
+    $condition: ModelAttachementConditionInput
+  ) {
+    updateAttachement(input: $input, condition: $condition) {
+      id
+      name
+      alt
+      type
+      link
+      solutionID
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const deleteAttachement = /* GraphQL */ `
+  mutation DeleteAttachement(
+    $input: DeleteAttachementInput!
+    $condition: ModelAttachementConditionInput
+  ) {
+    deleteAttachement(input: $input, condition: $condition) {
+      id
+      name
+      alt
+      type
+      link
+      solutionID
+      createdAt
+      updatedAt
+    }
+  }
+`;
 export const createFeature = /* GraphQL */ `
   mutation CreateFeature(
     $input: CreateFeatureInput!
@@ -60,11 +111,6 @@ export const createSolution = /* GraphQL */ `
       repo
       services
       iac
-      attachments {
-        id
-        url
-        type
-      }
       Features {
         nextToken
       }
@@ -73,6 +119,9 @@ export const createSolution = /* GraphQL */ `
       category
       owner
       language
+      Attachements {
+        nextToken
+      }
       createdAt
       updatedAt
     }
@@ -89,11 +138,6 @@ export const updateSolution = /* GraphQL */ `
       repo
       services
       iac
-      attachments {
-        id
-        url
-        type
-      }
       Features {
         nextToken
       }
@@ -102,6 +146,9 @@ export const updateSolution = /* GraphQL */ `
       category
       owner
       language
+      Attachements {
+        nextToken
+      }
       createdAt
       updatedAt
     }
@@ -118,11 +165,6 @@ export const deleteSolution = /* GraphQL */ `
       repo
       services
       iac
-      attachments {
-        id
-        url
-        type
-      }
       Features {
         nextToken
       }
@@ -131,6 +173,9 @@ export const deleteSolution = /* GraphQL */ `
       category
       owner
       language
+      Attachements {
+        nextToken
+      }
       createdAt
       updatedAt
     }

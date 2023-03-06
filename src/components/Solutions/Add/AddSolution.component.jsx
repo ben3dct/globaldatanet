@@ -6,10 +6,10 @@ import "./AddSolution.styles.scss";
 import { TextField } from "../../input/TextInput.component";
 import { MultiSelect } from "../../input/MultiSelect.component";
 import { useNavigate } from "react-router-dom";
-import { services, iac_tools, categories, status, languages } from "./options";
+import { services, iac_tools, categories, status, languages, attachement_types } from "./options";
 import { FeatureBox } from "./FeatureBox.component";
 import { API } from "aws-amplify";
-import { createSolution, createFeature } from "../../../graphql/mutations";
+import { createSolution, createFeature, createAttachement } from "../../../graphql/mutations";
 
 const defaultFields = {
 	title: "",
@@ -27,12 +27,21 @@ const defaultFeatureFields = {
 	status: "",
 	assignee: "",
 };
+const defaultAttachmentFields = {
+	name: "",
+	alt: "",
+	link: "",
+	type: [{}],
+};
+
 export const AddSolution = (props) => {
 	const { user } = props;
 	const navigate = useNavigate();
 	const [fields, setFields] = React.useState(defaultFields);
 	const [featureFields, setFeatureFields] = React.useState(defaultFeatureFields);
+	const [attachementFields, setAttachementFields] = React.useState(defaultAttachmentFields);
 	const [features, setFeatures] = React.useState([]);
+	const [attachements, setAttachements] = React.useState([]);
 
 	React.useEffect(() => {
 		setFields({ ...fields, owner: user?.attributes?.name });
@@ -42,6 +51,10 @@ export const AddSolution = (props) => {
 		setFeatures([...features, featureFields]);
 		setFeatureFields(defaultFeatureFields);
 	};
+	const addAttachement = () => {
+		setAttachements([...attachements, attachementFields]);
+		setAttachementFields(defaultAttachmentFields);
+	}
 	React.useEffect(() => {
 		console.log(features);
 	}, [features]);
@@ -80,13 +93,13 @@ export const AddSolution = (props) => {
 				},
 			},
 		}).then(async (res) => {
-			console.log(res);
+			const id = res.data.createSolution.id;
 			for (let x = 0; x < features.length; x++) {
 				await API.graphql({
 					query: createFeature,
 					variables: {
 						input: {
-							solutionID: res.data.createSolution.id,
+							solutionID: id,
 							name: features[x].name,
 							status: features[x].status.value,
 							assignee: features[x].assignee,
@@ -94,10 +107,29 @@ export const AddSolution = (props) => {
 					},
 				});
 			}
+			
+			for(let x = 0; x < attachements.length; x++) {
+				await API.graphql({
+					query: createAttachement,
+					variables: {
+						input: {
+						"name": attachements[x].name,
+						"alt": attachements[x].alt,
+						"type":  attachements[x].type,
+						"link": attachements[x].link,
+						"solutionID": id
+					}
+					}
+				});		
+			}
 			navigate("/solutions");
 		});
 	};
-
+	React.useEffect(() => {
+	  console.log(attachementFields)
+	
+	}, [attachementFields])
+	
 	return (
 		<div className='add-solutions-container'>
 			<form
@@ -172,7 +204,7 @@ export const AddSolution = (props) => {
 					fields={fields}
 					options={languages}
 				/>
-				<h1>Add Features</h1>
+				<h1>Features</h1>
 				<TextField
 					title='Name'
 					type='text'
@@ -198,6 +230,40 @@ export const AddSolution = (props) => {
 					options={status}
 				/>
 				<FeatureBox features={features} />
+				<h1>Attachements</h1>
+				<TextField
+					title='Name'
+					type='text'
+					required={true}
+					setFields={setAttachementFields}
+					fields={attachementFields}
+					placeholder='Give your attachement a name.'
+				/>
+				<TextField
+					title='Alt'
+					type='text'
+					required={false}
+					setFields={setAttachementFields}
+					fields={attachementFields}
+					placeholder='Provide alt text if desired.'
+				/>
+				<MultiSelect
+					title='Type'
+					isMulti={false}
+					placeholder='type of attachement'
+					setFields={setAttachementFields}
+					fields={attachementFields}
+					options={attachement_types}
+				/>
+				<TextField
+					title='Link'
+					type='text'
+					required={false}
+					setFields={setAttachementFields}
+					fields={attachementFields}
+					placeholder='Link your resource.'
+				/>
+				{/* <FeatureBox features={features} /> */}
 
 				<button
 					className='add-feature-submit'

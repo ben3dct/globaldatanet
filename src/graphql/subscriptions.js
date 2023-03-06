@@ -1,6 +1,54 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
+export const onCreateAttachement = /* GraphQL */ `
+  subscription OnCreateAttachement(
+    $filter: ModelSubscriptionAttachementFilterInput
+  ) {
+    onCreateAttachement(filter: $filter) {
+      id
+      name
+      alt
+      type
+      link
+      solutionID
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onUpdateAttachement = /* GraphQL */ `
+  subscription OnUpdateAttachement(
+    $filter: ModelSubscriptionAttachementFilterInput
+  ) {
+    onUpdateAttachement(filter: $filter) {
+      id
+      name
+      alt
+      type
+      link
+      solutionID
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onDeleteAttachement = /* GraphQL */ `
+  subscription OnDeleteAttachement(
+    $filter: ModelSubscriptionAttachementFilterInput
+  ) {
+    onDeleteAttachement(filter: $filter) {
+      id
+      name
+      alt
+      type
+      link
+      solutionID
+      createdAt
+      updatedAt
+    }
+  }
+`;
 export const onCreateFeature = /* GraphQL */ `
   subscription OnCreateFeature($filter: ModelSubscriptionFeatureFilterInput) {
     onCreateFeature(filter: $filter) {
@@ -48,11 +96,6 @@ export const onCreateSolution = /* GraphQL */ `
       repo
       services
       iac
-      attachments {
-        id
-        url
-        type
-      }
       Features {
         nextToken
       }
@@ -61,6 +104,9 @@ export const onCreateSolution = /* GraphQL */ `
       category
       owner
       language
+      Attachements {
+        nextToken
+      }
       createdAt
       updatedAt
     }
@@ -74,11 +120,6 @@ export const onUpdateSolution = /* GraphQL */ `
       repo
       services
       iac
-      attachments {
-        id
-        url
-        type
-      }
       Features {
         nextToken
       }
@@ -87,6 +128,9 @@ export const onUpdateSolution = /* GraphQL */ `
       category
       owner
       language
+      Attachements {
+        nextToken
+      }
       createdAt
       updatedAt
     }
@@ -100,11 +144,6 @@ export const onDeleteSolution = /* GraphQL */ `
       repo
       services
       iac
-      attachments {
-        id
-        url
-        type
-      }
       Features {
         nextToken
       }
@@ -113,6 +152,9 @@ export const onDeleteSolution = /* GraphQL */ `
       category
       owner
       language
+      Attachements {
+        nextToken
+      }
       createdAt
       updatedAt
     }

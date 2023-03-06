@@ -115,6 +115,7 @@ export const Columns = (props) => {
 						<div className='select'>
 							<Select
 								isMulti={false}
+								placeholder="filter by ..."
 								options={options}
 								onChange={(val) => {
 									filterType(val.value);
@@ -137,7 +138,7 @@ export const Columns = (props) => {
 									}}
 								/>
 							) : (
-								<h1>Select</h1>
+								null
 							)}
 						</div>
 					</div>

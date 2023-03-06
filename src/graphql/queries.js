@@ -1,6 +1,70 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
+export const getAttachement = /* GraphQL */ `
+  query GetAttachement($id: ID!) {
+    getAttachement(id: $id) {
+      id
+      name
+      alt
+      type
+      link
+      solutionID
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const listAttachements = /* GraphQL */ `
+  query ListAttachements(
+    $filter: ModelAttachementFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listAttachements(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        name
+        alt
+        type
+        link
+        solutionID
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+  }
+`;
+export const attachementsBySolutionID = /* GraphQL */ `
+  query AttachementsBySolutionID(
+    $solutionID: ID!
+    $sortDirection: ModelSortDirection
+    $filter: ModelAttachementFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    attachementsBySolutionID(
+      solutionID: $solutionID
+      sortDirection: $sortDirection
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+    ) {
+      items {
+        id
+        name
+        alt
+        type
+        link
+        solutionID
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+  }
+`;
 export const getFeature = /* GraphQL */ `
   query GetFeature($id: ID!) {
     getFeature(id: $id) {
@@ -70,11 +134,6 @@ export const getSolution = /* GraphQL */ `
       repo
       services
       iac
-      attachments {
-        id
-        url
-        type
-      }
       Features {
         nextToken
       }
@@ -83,6 +142,9 @@ export const getSolution = /* GraphQL */ `
       category
       owner
       language
+      Attachements {
+        nextToken
+      }
       createdAt
       updatedAt
     }

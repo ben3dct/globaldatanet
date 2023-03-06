@@ -34,3 +34,4 @@ export const languages = [
 	{ value: "ts", label: "TypeScript" },
 	{ value: "js", label: "JavaScript" },
 ];
+export const attachement_types = [{value: "blog", label: "Blog"}, {value: "yt", label: "YT Video"}]
