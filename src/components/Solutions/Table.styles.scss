@@ -84,17 +84,17 @@
 
 	display: flex;
 	flex-direction: column;
-	border: 1px solid red;
+	align-items: center;
 	position: fixed;
 	width: 100%;
 	gap: 0;
 	backdrop-filter: blur(5px);
+	padding-top: 10px;
 	.filter-inputs {
 		display: flex;
 		flex-direction: row;
 		justify-content: space-between;
-		width: 100%;
-		border: 1px solid red;
+		width: 90%;
 		
 		gap: 10px;
 		.text-inp,
