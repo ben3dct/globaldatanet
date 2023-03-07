@@ -81,37 +81,12 @@
 	border: 1px solid black;
 }
 .column-container {
-
-	display: flex;
-	flex-direction: column;
-	align-items: center;
 	position: fixed;
-	width: 100%;
-	gap: 0;
 	background-color: white;
-	z-index: 10;
-	padding-top: 10px;
-	.filter-inputs {
-		display: flex;
-		flex-direction: row;
-		justify-content: space-between;
-		width: 90%;
-		
-		gap: 10px;
-		.text-inp,
-		.select {
-			width: 50%;
-			z-index: 3;
-		}
-		.text-inp {
-			.filter-t-input {
-				width: 90%;
-				border: 1px solid black;
-				height: 100%;
-				margin-right: 10px;
-			}
-		}
-	}
+	width: 100%;
+	padding-right: 50px;
+	
+	z-index: 2;
 }
 @media (max-width: 800px) {
 	.author {

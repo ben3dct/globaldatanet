@@ -32,7 +32,9 @@ export const Navbar = (props) => {
 				onClick={() => {
 					navigate("/solutions");
 				}}>
-				<h1>Solution Catalogue</h1>
+				<h1 className="sc-text">Solution Catalogue</h1>
+				<div className="sc-logo" />
+
 			</div>
 			<div className='nav-center'>{showBtn ? null : <h2>Add Solution</h2>}</div>
 			<div className='nav-right'>

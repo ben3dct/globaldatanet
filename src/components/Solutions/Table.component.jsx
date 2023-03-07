@@ -8,6 +8,7 @@ import AccordionSummary from "@mui/material/AccordionSummary";
 import AccordionDetails from "@mui/material/AccordionDetails";
 import Typography from "@mui/material/Typography";
 import Chip from "@mui/material/Chip";
+import Filters from "../input/filter/Filters.component";
 import { categories } from "../Solutions/Add/options";
 import { useNavigate } from "react-router-dom";
 import { BiNetworkChart, BiInfinite, BiTransfer } from 'react-icons/bi';
@@ -107,41 +108,19 @@ const options = [
 	{ value: "author", label: "Author" },
 ];
 export const Columns = (props) => {
-	const { filterType, filterValue, inpValue, filterVal, setFilterIsOpenFunction } = props;
+	const { filterType, filterValue, inpValue, filterVal, setFilterIsOpenFunction, sortState, setSortState } = props;
 
 	return (
 		<div className='column-container'>
-					<div className='filter-inputs'>
-						<div className='select'>
-							<Select
-								isMulti={false}
-								placeholder="filter by ..."
-								options={options}
-								onChange={(val) => {
-									filterType(val.value);
-								}}
-							/>
-						</div>
-						<div className='text-inp'>
-							{filterVal === "title" || filterVal === "author" ? (
-								<input
-								className="filter-t-input"
-									onChange={(e) => filterValue(e.target.value)}
-									value={inpValue}
-								/>
-							) : filterVal === "category" ? (
-								<Select
-									isMulti={false}
-									options={categories}
-									onChange={(val) => {
-										filterValue(val.value);
-									}}
-								/>
-							) : (
-								null
-							)}
-						</div>
-					</div>
+					<Filters
+					filterType={filterType}
+					filterValue={filterValue}
+					inpValue={inpValue}
+					filterVal={filterVal}
+					sortState={sortState}
+					setSortState={setSortState}
+					setFilterIsOpenFunction={setFilterIsOpenFunction}
+					/>
 			<div className='solution-list-columns'>
 				<div className='row-group-md'>
 					<div className='title'>Title</div>

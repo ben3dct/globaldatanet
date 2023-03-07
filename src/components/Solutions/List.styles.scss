@@ -4,13 +4,16 @@
 	height: 100%;
 	width: 100%;
 	display: flex;
+	overflow-x: auto;
+	overflow-y: auto;
 	flex-direction: column;
 	gap: 10px;
 	padding-left: 10px;
 	padding-right: 10px !important;
 	margin-top: 0px;
+
 	.item-container {
-		margin-top: 100px;
+		margin-top: 130px;
 	}
 	.item-container-open {
 		margin-top: 200px;

@@ -14,6 +14,8 @@ export const List = (props) => {
 	const [filterType, setFilterType] = React.useState("");
 	const [filterValue, setFilterValue] = React.useState("");
 	const [filteredSolutions, setFilteredSolutions] = React.useState(allSolutions);
+	const [sort, setSort] = React.useState("az");
+
 
 	React.useEffect(() => {
 		setFilterValue("");
@@ -53,6 +55,8 @@ export const List = (props) => {
 				filterType={setFilterType}
 				filterValue={setFilterValue}
 				filterVal={filterType}
+				sortState={sort}
+				setSortState={setSort}
 				inpValue={filterValue}
 			/>
 			<div className={filterIsOpen? 'item-container-open' : 'item-container'}>

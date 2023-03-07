@@ -26,6 +26,25 @@
 		justify-self: flex-start;
 		text-align: left;
 		cursor: pointer;
+		.sc-logo {
+			display: none;
+		}
+		@media (max-width: 900px) {
+			.sc-logo {
+				display: block !important;
+				visibility: visible !important;
+				height: 40px;
+				width: 40px;
+				border:1px solid white;
+				border-radius: 6px;
+				background-image: url(../../resources/logo.png);
+				background-size: 40px 40px;
+			}
+			.sc-text {
+				display: none;
+			}
+		  }
+		  
 	}
 	.logout-btn {
 		background: none;
@@ -35,7 +54,7 @@
 		outline: inherit;
 	}
 	.add-solution-btn {
-		background-color: rgb(0, 236, 189);
+		background-color: white;
 		border: 1px solid black;
 		width: 100px;
 	}
