@@ -106,6 +106,7 @@ const options = [
 	{ value: "title", label: "Title" },
 	{ value: "category", label: "Category" },
 	{ value: "author", label: "Author" },
+
 ];
 export const Columns = (props) => {
 	const { filterType, filterValue, inpValue, filterVal, setFilterIsOpenFunction, sortState, setSortState } = props;

@@ -8,6 +8,9 @@ const options = [
 	{ value: "title", label: "Title" },
 	{ value: "category", label: "Category" },
 	{ value: "author", label: "Author" },
+    { value: "feature", label: "Feature" },
+	{ value: "service", label: "AWS Service"},
+	{ value: "iac", label: "IaC Tool"}
 ];
 const sort_options = [
     {value: "az", label: "A-Z"},
