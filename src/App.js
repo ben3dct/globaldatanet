@@ -40,6 +40,7 @@ function App() {
 	const [user, setUser] = useState(null);
 	const [editing, setEditing] = useState(null);
 	const [solutions, setSolutions] = useState([]);
+	const [loader, setLoader] = useState(false);
 	const navigate = useNavigate();
 
 	useEffect(() => {
@@ -74,9 +75,10 @@ function App() {
 	}
 
 	const getSolutions = async () => {
+	setLoader(true);
 		const allSolutions = await API.graphql({
 			query: listSolutions,
-		});
+		}).then(setLoader(false));
 		setSolutions(allSolutions?.data?.listSolutions?.items);
 	};
 
@@ -96,6 +98,7 @@ function App() {
 							<List
 								allSolutions={solutions}
 								setEditing={setEditing}
+								loading={loader}
 							/>
 						}
 					/>

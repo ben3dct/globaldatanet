@@ -9,7 +9,7 @@ import { optionGroupUnstyledClasses } from "@mui/base";
 export const List = (props) => {
 	// List all items
 
-	const { allSolutions, setEditing } = props;
+	const { allSolutions, setEditing, loading } = props;
 	const [ filterIsOpen, setFilterIsOpen ] = React.useState(false);
 	const [filterType, setFilterType] = React.useState("");
 	const [filterValue, setFilterValue] = React.useState("");
@@ -60,6 +60,7 @@ export const List = (props) => {
 				inpValue={filterValue}
 			/>
 			<div className={filterIsOpen? 'item-container-open' : 'item-container'}>
+			
 				{filteredSolutions.map(({ id, title, description, owner, category }) => {
 					return (
 						
