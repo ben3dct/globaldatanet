@@ -2,6 +2,7 @@ import * as React from 'react'
 import PropTypes from 'prop-types'
 import './Filters.styles.scss';
 import Select from "react-select";
+import { categories} from "../../Solutions/Add/options";
 
 const options = [
 	{ value: "title", label: "Title" },
@@ -30,7 +31,23 @@ const Filters = (props) => {
 									filterType(val.value);
 								}}
 							/>
-           <input type="text" className="text-input-filter" />
+                           {filterVal === "title" || filterVal === "author" ? (
+								<input
+								className="text-input-filter"
+									onChange={(e) => filterValue(e.target.value)}
+									value={inpValue}
+								/>
+							) : filterVal === "category" ? (
+								<Select
+									isMulti={false}
+									options={categories}
+									onChange={(val) => {
+										filterValue(val.value);
+									}}
+								/>
+							) : (
+								null
+							)}
 
                             </div>
         </div>
