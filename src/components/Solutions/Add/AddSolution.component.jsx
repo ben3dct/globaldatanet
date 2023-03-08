@@ -70,6 +70,10 @@ export const AddSolution = (props) => {
 		for (let x = 0; x < fields.services.length; x++) {
 			service.push(fields.services[x].value);
 		}
+		let iacArr = [];
+		for (let x = 0; x < fields.iac.length; x++) {
+			iacArr.push(fields.iac[x].value);
+		}
 		API.graphql({
 			query: createSolution,
 			variables: {
@@ -77,8 +81,7 @@ export const AddSolution = (props) => {
 					title: fields.title,
 					repo: fields.repository,
 					services: service,
-					iac: fields.iac.value,
-					attachments: [],
+					iac: iacArr,
 					description: fields.description,
 					generalization: fields.generalization,
 					category: categories,
@@ -87,6 +90,7 @@ export const AddSolution = (props) => {
 				},
 			},
 		}).then(async (res) => {
+			console.log(res);
 			const id = res.data.createSolution.id;
 			for (let x = 0; x < features.length; x++) {
 				await API.graphql({
@@ -237,7 +241,7 @@ export const AddSolution = (props) => {
 				<TextField
 					title='Name'
 					type='text'
-					required={true}
+					required={false}
 					setFields={setAttachementFields}
 					fields={attachementFields}
 					placeholder='Give your attachement a name.'
@@ -266,6 +270,7 @@ export const AddSolution = (props) => {
 					fields={attachementFields}
 					placeholder='Link your resource.'
 				/>
+				<FeatureBox features={attachements} propertyExists={true}/>
 				<button
 					className='add-feature-submit'
 					type='button'

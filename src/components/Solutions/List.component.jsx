@@ -3,11 +3,12 @@
 import * as React from "react";
 import "./List.styles.scss";
 import { Row, Columns } from "./Table.component";
+import Box from '@mui/material/Box';
+import LinearProgress from '@mui/material/LinearProgress';
 import { API } from "aws-amplify";
 import { listSolutions, getSolution, listFeatures } from "../../graphql/queries";
 import { optionGroupUnstyledClasses } from "@mui/base";
 export const List = (props) => {
-	// List all items
 
 	const { allSolutions, setEditing, loading } = props;
 	const [ filterIsOpen, setFilterIsOpen ] = React.useState(false);
@@ -15,7 +16,8 @@ export const List = (props) => {
 	const [filterValue, setFilterValue] = React.useState("");
 	const [tempArray, setTempArray] = React.useState([]);
 	const [filteredSolutions, setFilteredSolutions] = React.useState(allSolutions);
-	const [sort, setSort] = React.useState("az");
+	const [sortedSolutions, setSortedSolutions] = React.useState([]);
+	const [sort, setSort] = React.useState({value: "az", label: "A-Z"});
 
 
 	React.useEffect(() => {
@@ -93,10 +95,74 @@ export const List = (props) => {
 			return;
 		}
 		setFilteredSolutions(tempArray);
-	}, [tempArray]);
+	}, [tempArray, window.location.href]);
+	// sorting
 
+	React.useEffect(() => {
+		let solutions = filteredSolutions;
+		if(sort.value === "az") {
+			
+			let sorted_solutions = solutions.sort(function (a, b) {
+				if (a.title < b.title) {
+				  return -1;
+				}
+				if (a.title > b.title) {
+				  return 1;
+				}
+				return 0;
+			  });
+			  setSortedSolutions(sorted_solutions);
+		} else if (sort.value === "za") {
+			let step = solutions.sort(function (a, b) {
+				if (a.title < b.title) {
+				  return -1;
+				}
+				if (a.title > b.title) {
+				  return 1;
+				}
+				return 0;
+			  });
+			const sorted_solutions = step.reverse();
+			setSortedSolutions(sorted_solutions);
+		} else {
+			setSortedSolutions(filteredSolutions);
+		}
+	}, [filteredSolutions, sort]);
+
+	function sortSolutions() {
+		let solutions = filteredSolutions;
+		if(sort === "az") {
+			
+			let sorted_solutions = solutions.sort(function (a, b) {
+				if (a.title < b.title) {
+				  return -1;
+				}
+				if (a.title > b.title) {
+				  return 1;
+				}
+				return 0;
+			  });
+			  setFilteredSolutions(sorted_solutions);
+		} else if (sort === "za") {
+			
+			let step = solutions.sort(function (a, b) {
+				if (a.title < b.title) {
+				  return -1;
+				}
+				if (a.title > b.title) {
+				  return 1;
+				}
+				return 0;
+			  });
+			const sorted_solutions = step.reverse();
+			setFilteredSolutions(sorted_solutions);
+		}
+		
+	}
+	React.useEffect(() => {console.log(sort)}, [sort])
 	return (
 		<div className='solution-list-container'>
+			
 			<Columns
 				setFilterIsOpenFunction={setFilterIsOpenFunction}
 				filterType={setFilterType}
@@ -107,22 +173,30 @@ export const List = (props) => {
 				inpValue={filterValue}
 			/>
 			<div className={filterIsOpen? 'item-container-open' : 'item-container'}>
-			
-				{filteredSolutions.map(({ id, title, description, owner, category }) => {
+				{sortedSolutions.length > 0? 
+				sortedSolutions.map(({ id, title, description, owner, category }) => {
+
+
+
 					return (
 						<Row
-							setEditing={setEditing}
-							key={id}
-							filterType={filterType}
-							filterValue={filterValue}
-							id={id}
-							title={title}
-							categories={category}
-							description={description}
-							owner={owner}
-						/>
+						setEditing={setEditing}
+						key={id}
+						filterType={filterType}
+						filterValue={filterValue}
+						id={id}
+						title={title}
+						categories={category}
+						description={description}
+						owner={owner}
+					/> 
+					
 					);
-				})}
+				}) :   
+<LinearProgress />
+				
+				
+			   }
 			</div>
 		</div>
 	);

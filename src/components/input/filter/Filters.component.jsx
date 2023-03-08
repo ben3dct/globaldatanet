@@ -13,8 +13,8 @@ const options = [
 	{ value: "iac", label: "IaC Tool"}
 ];
 const sort_options = [
-    {value: "az", label: "A-Z"},
-    {value: "za", label: "Z-A"},
+    {value: "az", label: "Z-A"},
+    {value: "za", label: "A-Z"},
     {value: "date", label: "newest"},
     {value: "date_old", label: "oldest"}
 
@@ -72,8 +72,9 @@ const Filters = (props) => {
 								placeholder="Sort"
 								options={sort_options}
 								onChange={(val) => {
-									filterType(val.value);
+									setSortState(val);
 								}}
+								value={sortState}
 							/>
             </div>
 

@@ -1,6 +1,6 @@
 /** @format */
 import "./App.scss";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { AuthPage } from "./pages/auth/Auth";
 
 import { Route, Routes, useNavigate } from "react-router-dom";
@@ -45,7 +45,7 @@ function App() {
 
 	useEffect(() => {
 		getSolutions();
-	}, []);
+	}, [window.location.href]);
 	useEffect(() => {
 		Hub.listen("auth", ({ payload: { event, data } }) => {
 			// eslint-disable-next-line default-case
@@ -73,7 +73,7 @@ function App() {
 			.then((userData) => userData)
 			.catch(() => navigate("/auth"));
 	}
-
+	
 	const getSolutions = async () => {
 	setLoader(true);
 		const allSolutions = await API.graphql({

@@ -10,10 +10,10 @@
     justify-content: flex-start;
     .section-one, .section-two {
         flex-grow: 1;
-        
+        height: 49px;
     }
     .section-two {
-        
+    
         .text-input-filter { 
                 height: 100%;
                 width: 100%;
@@ -24,9 +24,9 @@
     .section-between {
         flex-grow: 2;
         
-        height: 50px;
+        height: 49px;
         align-self: flex-start;
-        padding-top: 5px;
+        padding-top:5px;
         .inner {
             border: 1px solid black;
             height: 100%;
@@ -47,7 +47,7 @@
         }
         }
     }
-    
+
     .section-two {
         align-self: flex-start;
         padding-top: 5px;
