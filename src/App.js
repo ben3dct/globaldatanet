@@ -81,7 +81,7 @@ function App() {
 		}).then(setLoader(false));
 		setSolutions(allSolutions?.data?.listSolutions?.items);
 	};
-
+	console.log(user);
 	return (
 		<div className='main-container'>
 			<Routes>
@@ -91,7 +91,7 @@ function App() {
 				/>
 				<Route
 					path='/'
-					element={<Layout footerData={solutions.length} />}>
+					element={<Layout footerData={solutions.length} user={user}/>}>
 					<Route
 						path='solutions'
 						element={
