@@ -26,8 +26,6 @@ export const List = (props) => {
 	React.useEffect(() => {
 		let solutionArr = [];
 		if (filterType === "title") {
-			// List all items
-
 			API.graphql({
 				query: listSolutions,
 				variables: { filter: { title: { contains: filterValue } } },
@@ -43,26 +41,6 @@ export const List = (props) => {
 				variables: { filter: { owner: { contains: filterValue } } },
 			}).then((solutions) => setFilteredSolutions(solutions.data.listSolutions.items));
 		} else if (filterType === "feature") {
-			
-			// filter by feature name implementation
-			// .then(res => {
-			// 	setFeatureFiltered([{}]);
-			// 	for (let x = 0; x < res.data.listFeatures.items.length; x++) {
-			// 		featureFilter(x, res);
-
-			// 	}
-				
-			// });
-			// setFilteredSolutions(featureFiltered);
-
-
-
-			/**
-			 * // Get a specific item
-		
-			 */
-
-			// get features and the solution id's
 			API.graphql({
 				query: listFeatures,
 				variables: { filter: { name: { contains: filterValue } } },
@@ -82,12 +60,19 @@ export const List = (props) => {
 				
 				
 			})
-
-			// get each solution with solutionID
-
-			// push all solutions to an array
+		} else if (filterType === "service") {
 			
-		}
+			API.graphql({
+				query: listSolutions,
+				variables: { filter: { services: { contains: (filterValue? filterValue : "") } } },
+			}).then((solutions) => setFilteredSolutions(solutions.data.listSolutions.items));
+		} else if (filterType === "iac") {
+			
+			API.graphql({
+				query: listSolutions,
+				variables: { filter: { iac: { contains: (filterValue? filterValue : "") } } },
+			}).then((solutions) => setFilteredSolutions(solutions.data.listSolutions.items));
+		}  
 		else {
 			setFilteredSolutions(allSolutions);
 		}
@@ -104,8 +89,12 @@ export const List = (props) => {
 		setFilterIsOpen(!filterIsOpen);
 	}
 	React.useEffect(() => {
+		if(tempArray == filteredSolutions) {
+			return;
+		}
 		setFilteredSolutions(tempArray);
 	}, [tempArray]);
+
 	return (
 		<div className='solution-list-container'>
 			<Columns
