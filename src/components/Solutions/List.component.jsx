@@ -10,7 +10,7 @@ import { listSolutions, getSolution, listFeatures } from "../../graphql/queries"
 import { optionGroupUnstyledClasses } from "@mui/base";
 export const List = (props) => {
 
-	const { allSolutions, setEditing, loading } = props;
+	const { allSolutions, setViewing, loading } = props;
 	const [ filterIsOpen, setFilterIsOpen ] = React.useState(false);
 	const [filterType, setFilterType] = React.useState("");
 	const [filterValue, setFilterValue] = React.useState("");
@@ -180,7 +180,7 @@ export const List = (props) => {
 
 					return (
 						<Row
-						setEditing={setEditing}
+						setViewing={setViewing}
 						key={id}
 						filterType={filterType}
 						filterValue={filterValue}

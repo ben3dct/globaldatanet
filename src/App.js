@@ -12,6 +12,7 @@ import { List } from "./components/Solutions/List.component";
 import { AddSolution } from "./components/Solutions/Add/AddSolution.component";
 import { EditSolution } from "./components/Solutions/Edit/EditSolution.component";
 import { listSolutions, getSolution } from "./graphql/queries";
+import ViewSolution from "./components/Solutions/View/ViewSolution.component";
 const isLocalhost = Boolean(
 	window.location.hostname === "localhost" ||
 		// [::1] is the IPv6 localhost address.
@@ -38,9 +39,10 @@ Amplify.configure(updatedAwsConfig);
 
 function App() {
 	const [user, setUser] = useState(null);
-	const [editing, setEditing] = useState(null);
+	const [viewing, setViewing] = useState(null);
 	const [solutions, setSolutions] = useState([]);
 	const [loader, setLoader] = useState(false);
+	const [viewFooterData, setViewFooterData] = useState({});
 	const navigate = useNavigate();
 
 	useEffect(() => {
@@ -74,6 +76,11 @@ function App() {
 			.catch(() => navigate("/auth"));
 	}
 	
+
+	const updateFooter = (data) => {
+		setViewFooterData(data);
+	}
+	useEffect(() => {console.log(viewFooterData)}, [viewFooterData])
 	const getSolutions = async () => {
 	setLoader(true);
 		const allSolutions = await API.graphql({
@@ -91,14 +98,15 @@ function App() {
 				/>
 				<Route
 					path='/'
-					element={<Layout footerData={solutions.length} user={user}/>}>
+					element={<Layout footerData={solutions.length} user={user} viewFooterData={viewFooterData}/>}>
 					<Route
 						path='solutions'
 						element={
 							<List
 								allSolutions={solutions}
-								setEditing={setEditing}
+								setViewing={setViewing}
 								loading={loader}
+								updateFooterData={setViewFooterData}
 							/>
 						}
 					/>
@@ -109,6 +117,10 @@ function App() {
 					<Route
 						path='edit'
 						element={<EditSolution />}
+					/>
+					<Route
+						path='view'
+						element={<ViewSolution id={viewing} updateFooter={updateFooter}/>}
 					/>
 				</Route>
 				<Route

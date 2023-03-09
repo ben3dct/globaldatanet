@@ -16,7 +16,7 @@ import {FaChessQueen} from 'react-icons/fa';
 import { MdOutlineSecurity, MdStorage } from 'react-icons/md';
 import Tooltip from '@mui/material/Tooltip';
 import { SiLinuxcontainers, SiServerless } from 'react-icons/si'
-export const Row = ({ filterType, filterValue, id, title, owner, description, setEditing, categories, setFilterIsOpenFunction }) => {
+export const Row = ({ filterType, filterValue, id, title, owner, description, setViewing, categories, setFilterIsOpenFunction }) => {
 
 	const navigate = useNavigate(); 
 	//not the best way to do it but ..
@@ -72,8 +72,9 @@ export const Row = ({ filterType, filterValue, id, title, owner, description, se
 		<div
 			key={id}
 			onClick={() => {
-				setEditing(id);
-				navigate("/edit");
+				setViewing(id);
+				navigate(`/view`);
+				console.log(id);
 			}}
 			className='solution-list-row'>
 			

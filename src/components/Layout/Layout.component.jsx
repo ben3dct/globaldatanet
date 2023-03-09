@@ -6,7 +6,7 @@ import { Outlet } from "react-router-dom";
 import { Navbar } from "../Navbar/Navbar.component";
 import { Footer } from "../Footer/Footer.component";
 export const Layout = (props) => {
-	const { footerData, user } = props;
+	const { footerData, user, viewFooterData } = props;
 	return (
 		<div className='layout'>
 			<div className='header'>
@@ -16,7 +16,7 @@ export const Layout = (props) => {
 				<Outlet />
 			</div>
 			<div className='footer'>
-				<Footer num={footerData} user={user}/>
+				<Footer num={footerData} user={user} viewFooterData={viewFooterData}/>
 			</div>
 		</div>
 	);

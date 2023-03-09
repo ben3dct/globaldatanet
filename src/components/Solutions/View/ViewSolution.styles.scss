@@ -1,0 +1,37 @@
+.vs-container {
+    padding: 10px;
+    display:flex;
+    flex-direction: column;
+    overflow-y: scroll;
+    .vs-col {
+        height: fit-content;
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        gap: 10px;
+        align-items: start;
+        .vs-col-row {
+            height: 300px;
+            overflow-y: scroll;
+            width: 50%;
+        }
+        .content{
+            height: 40vh;
+            display: flex;
+            flex-direction: row;
+            padding: 5px;
+            width: 100%;
+            gap: 10px;
+            .about {
+                width: 33%;
+            }
+            .dg {
+                display: flex;
+                flex-direction: column;
+                width: 100%;
+                height: fit-content;
+            }
+        }
+    }
+}
