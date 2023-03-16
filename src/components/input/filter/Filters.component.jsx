@@ -15,8 +15,6 @@ const options = [
 const sort_options = [
     {value: "az", label: "Z-A"},
     {value: "za", label: "A-Z"},
-    {value: "date", label: "newest"},
-    {value: "date_old", label: "oldest"}
 
 ]
 const Filters = (props) => {

@@ -30,4 +30,14 @@
 	.center {
 		justify-content: center;
 	}
+	.edit-solution-btn {
+		padding: 5px;
+		background-color: white;
+		border-radius: 8px;
+		width: 50px;
+		outline: none;
+		box-shadow: none;
+		border: 1px solid black;
+		cursor: pointer;
+	}
 }

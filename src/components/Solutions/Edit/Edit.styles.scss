@@ -11,6 +11,47 @@
 	.abort-solution-submit {
 		height: 50px;
 	}
+	.info-box {
+		display: flex;
+		flex-direction: column;
+		gap: 10px;
+		padding: 10px;
+		.body-text {
+			padding-left: 10px;
+			padding-right: 10px;
+		}
+	}
+	.info-box-heading {
+		display: flex;
+		flex-direction: row;
+		gap: 10px;
+		border-radius: 8px;
+		font-weight: bold;
+		align-items: center;
+		
+	}
+	.btn-edit-group {
+		display: flex;
+		cursor: pointer;
+		flex-direction: row;
+		width: 100%;
+		padding: 5px;
+		gap: 10px;
+		justify-content: space-between;
+		.delete {
+			background-color: red !important;
+			color: white !important;
+			width: 20% !important;
+		}
+		.edit-btn {
+			background-color: white;
+			width: 80%;
+			height: 50px;
+			border-radius: 8px;
+			border: 0.5px black solid;
+			cursor: pointer !important;
+		}
+	}
 	.add-form {
 		padding: 0px;
 		display: flex;

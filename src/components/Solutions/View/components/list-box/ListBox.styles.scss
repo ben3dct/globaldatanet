@@ -1,0 +1,19 @@
+.main-contents-box {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    text-align: left;
+    padding: 5px;
+  }
+  .property-value-row {
+    display: flex;
+    flex-direction: row;
+  }
+  .property,
+  .value {
+    width: 50%;
+  }
+  .value {
+    text-align: right !important;
+  }
+  

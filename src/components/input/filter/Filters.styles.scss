@@ -28,7 +28,6 @@
         align-self: flex-start;
         padding-top:5px;
         .inner {
-            border: 1px solid black;
             height: 100%;
             .no-filter {
                 width: 100%;
@@ -54,7 +53,6 @@
         justify-self: flex-end;
         flex-grow: 1;
         .sort {
-            border: 1px solid black;
             border-radius: 8px;
             padding: 2px;
         }
@@ -63,7 +61,6 @@
         padding-top: 5px;
 
         .section-one-one {
-            border: 1px solid black;
             border-radius: 8px;
             padding: 2px;
             display: flex;

@@ -8,12 +8,17 @@ import PropTypes from 'prop-types';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import Typography from '@mui/material/Typography';
-import Box from '@mui/material/Box';
+import Box  from '@mui/material/Box';
+import CustomBox from './components/box/Box.component';
+import { AiOutlineSolution } from 'react-icons/ai'
+import { GoCheck, GoChecklist, GoFile } from "react-icons/go";
+
 import Paper from '@mui/material/Paper';
+import ListBox from './components/list-box/ListBox.component';
 
 const YTembed = ({link}) => {
     return (
-        <iframe className='iframe' src={link}></iframe>
+        <iframe width="560" height="315" src="https://www.youtube.com/embed/-Ur3wwV6RXw" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
     )
 }
 function TabPanel(props) {
@@ -48,11 +53,12 @@ function TabPanel(props) {
       'aria-controls': `simple-tabpanel-${index}`,
     };
   }
-const ViewSolution = ({id, updateFooter}) => {
+const ViewSolution = ({id, updateFooter, updateGlobalID}) => {
 
     const [solution , setSolution] = React.useState([{}]);
     const [attachments, setAttachments] = React.useState([]);
     const [features, setFeatures] = React.useState([]);
+    const [listObject, setListObject] = React.useState({});
     const getData = async () => {
         await API.graphql
         ({
@@ -79,8 +85,17 @@ const ViewSolution = ({id, updateFooter}) => {
 
     React.useEffect(() => {
         getData();
+        updateGlobalID(id);
+        
     }, [])
-
+    React.useEffect(() => {
+        if(solution?.createdAt) {
+            createListObject();
+        } else {
+            return;
+        }
+       
+    }, [solution])
     React.useEffect(() => {
         console.log(features)
         
@@ -103,44 +118,52 @@ const ViewSolution = ({id, updateFooter}) => {
         }
     }, [solution])
 
+    const createListObject = () => {
+        let obj = {owner: solution.owner, repo: solution.repo, language: solution.language.toString(), category: solution.category.toString(), services: solution.services.toString()};
+        setListObject(obj);
+    }
+    React.useEffect(() => {
+        console.log(listObject);
+    }, [listObject])
+
     return (
-        <div className="vs-container">
-            
-            <div className="vs-col">
-            <div className="content">
-            <div className="about"><Paper sx={{height: '100%', padding: '5px'}} elevation={3}>
-            <h4 className="vs-title">Description</h4>
-                {solution.description? solution.description : "none"}
-                
-                </Paper></div>
-            <div className="about"><Paper sx={{height: '100%', padding: '5px'}} elevation={3}>
-            <h4>Generalization</h4>
-                {solution.generalization? solution.generalization : "none"}
-                
-                </Paper></div>
-            <div className="about"><Paper sx={{height: '100%', padding: '5px'}} elevation={3}>
-            <h4>Owner</h4>
-                {solution.owner? solution.owner : 'none'}
-                <h4>Github</h4>
-                <code>{solution.repo? solution.repo : "none"}</code>
-                <h4>Languages</h4>
-                {languages.map((language) => {
-                    return `${language} `
-                })}
-                </Paper></div>
+      <div className="vs-container">
+          <Box
+      sx={{
+        display: 'flex',
+        flexWrap: 'wrap',
+        '& > :not(style)': {
+          m: 1,
+          width: '100%',
+          height: 'auto',
+        },
+      }}
+    >
+     
+      <Paper elevation={1} sx={{padding: '10px', border: '0.5px solid black'}}>
+        <div className="content-box">
+            <Paper sx={{padding: '3px'}} elevation={4}>
+            <div className="content-heading">
+                <AiOutlineSolution size={40} />
+                <span className="content-span">{solution.title && solution.owner? `${solution.title} by ${solution.owner}` : "Oops! This Solution is untitled"}</span>
             </div>
-            </div>
-            <div className="vs-col">
-                <div className="vs-col-row">
-               
-                <h3 className="vs-title">Features</h3>
-                    <Feature features={features} />
-                </div>
-                <div className="vs-col-row">
-                <h3 className="vs-title">Attachments</h3>
-                </div>
-            </div>
+            </Paper>
+            <Paper sx={{padding: '3px'}} elevation={2}>
+                <div className="first-section">
+                    <div className="description-cbox">
+                    <CustomBox title="Description" content={solution.description} icon={<GoFile size={20} />}/>
+                    </div>
+                    <div className="generalization-cbox">
+               <CustomBox title="Generalization" content={solution.generalization} icon={<GoChecklist size={20} />}/>
+               </div>
+               </div>
+                <ListBox mapArray={listObject} />
+            </Paper>
         </div>
+      </Paper>
+     
+    </Box>
+      </div>
     )
 }
 export default ViewSolution

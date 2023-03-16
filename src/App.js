@@ -43,6 +43,7 @@ function App() {
 	const [solutions, setSolutions] = useState([]);
 	const [loader, setLoader] = useState(false);
 	const [viewFooterData, setViewFooterData] = useState({});
+	const [globalID, setGlobalID] = useState("");
 	const navigate = useNavigate();
 
 	useEffect(() => {
@@ -89,6 +90,11 @@ function App() {
 		setSolutions(allSolutions?.data?.listSolutions?.items);
 	};
 	console.log(user);
+
+	const updateGlobalID = (strID) => {
+		setGlobalID(strID);
+	}
+
 	return (
 		<div className='main-container'>
 			<Routes>
@@ -98,7 +104,7 @@ function App() {
 				/>
 				<Route
 					path='/'
-					element={<Layout footerData={solutions.length} user={user} viewFooterData={viewFooterData}/>}>
+					element={<Layout updateGlobalID={updateGlobalID} footerData={solutions.length} user={user} viewFooterData={viewFooterData}/>}>
 					<Route
 						path='solutions'
 						element={
@@ -116,11 +122,11 @@ function App() {
 					/>
 					<Route
 						path='edit'
-						element={<EditSolution />}
+						element={<EditSolution id={viewing} globalID={globalID}/>}
 					/>
 					<Route
 						path='view'
-						element={<ViewSolution id={viewing} updateFooter={updateFooter}/>}
+						element={<ViewSolution updateGlobalID={updateGlobalID} id={viewing} updateFooter={updateFooter}/>}
 					/>
 				</Route>
 				<Route
